@@ -26,6 +26,10 @@ export default new Router({
         path: '/dispatch/ArtificialScheduling',
         name: 'ArtificialScheduling',
         component: () => import('@/views/dispatch/ArtificialScheduling')
+  },{
+        path: '/dispatch/SignForEntry',
+        name: 'SignForEntry',
+        component: () => import('@/views/dispatch/SignForEntry')
   }]
   }]
 })

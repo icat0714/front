@@ -135,7 +135,7 @@
               {
                 id: '4-3',
                 text: '签收录入',
-                url: ''
+                url: '/dispatch/SignForEntry'
               },
               {
                 id: '4-4',

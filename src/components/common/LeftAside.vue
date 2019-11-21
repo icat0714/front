@@ -1,9 +1,9 @@
 <template>
 
   <el-scrollbar>
-    <el-menu router :default-active="this.$route.path"  class="el-menu-vertical-demo" background-color="#334157" text-color="#fff"
+    <el-menu router :default-active="1" class="el-menu-vertical-demo" background-color="#334157" text-color="#fff"
       active-text-color="#ffd04b" :collapse="showLeft" style="height: 1000px;">
-      <el-menu-item index="/main">
+      <el-menu-item index="1">
         <i class="el-icon-s-home"></i>
         <span slot="title">首页</span>
       </el-menu-item>
@@ -125,12 +125,12 @@
             children: [{
                 id: '4-1',
                 text: '查台转单',
-                url: '/dispatch/CheckTableToTurnSingle'
+                url: ''
               },
               {
                 id: '4-2',
                 text: '人工调度',
-                url: '/dispatch/ArtificialScheduling'
+                url: ''
               },
               {
                 id: '4-3',

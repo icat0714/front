@@ -7,6 +7,10 @@ Vue.use(Router)
 
 export default new Router({
   routes: [{
+     path:'/',
+     name:'LoGin',
+     component: () => import('@/components/LoGin')
+  },{
     path: '/Main',
     name: 'Main',
     component: Main,
@@ -14,6 +18,14 @@ export default new Router({
         path: '/book/BookList',
         name: 'BookList',
         component: BookList
-      }]
+      },{
+        path: '/dispatch/CheckTableToTurnSingle',
+        name: 'CheckTableToTurnSingle',
+        component: () => import('@/views/dispatch/CheckTableToTurnSingle')
+  },{
+        path: '/dispatch/ArtificialScheduling',
+        name: 'ArtificialScheduling',
+        component: () => import('@/views/dispatch/ArtificialScheduling')
+  }]
   }]
 })

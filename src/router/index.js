@@ -53,11 +53,6 @@ export default new Router({
         component: packagingMaterialManagement
         }
 
-
-
-
-
-
         ]
     }]
 })

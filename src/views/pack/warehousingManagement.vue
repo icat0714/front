@@ -41,11 +41,7 @@
       <el-form-item label="货物编码:">
          <el-input v-model="type" placeholder="请输入货物编码"></el-input>
       </el-form-item>
-      <el-form-item label="货物名称:">
-         <el-input v-model="type" placeholder="请输入货物名称"></el-input>
-      </el-form-item>
-      <el-form-item label="开单时间:">
-         <el-input v-model="type" placeholder="请输入开单时间"></el-input>
+      
       </el-form-item>
       </div>
       <el-button type="primary" icon="el-icon-plus">新增</el-button>

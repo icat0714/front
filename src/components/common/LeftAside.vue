@@ -177,22 +177,22 @@
             children: [{
                 id: '6-1',
                 text: '包装材料物品管理',
-                url: ''
+                url: '/packagingMaterialManagement'
               },
               {
                 id: '6-2',
                 text: '入库管理',
-                url: ''
+                url: '/warehousingManagement'
               },
               {
                 id: '6-3',
                 text: '出库管理',
-                url: ''
+                url: '/outboundManagement'
               },
               {
                 id: '6-4',
                 text: '库存管理',
-                url: ''
+                url: 'inventoryManagement'
               }
             ]
           },
@@ -203,12 +203,12 @@
             children: [{
                 id: '7-1',
                 text: '包装信息录入',
-                url: ''
+                url: '/packagingInformationInput'
               },
               {
                 id: '7-2',
                 text: '包装信息查询',
-                url: ''
+                url: '/packagingInformationQuery'
               }
             ]
           },

@@ -8,7 +8,8 @@ import inventoryManagement from '@/views/pack/inventoryManagement'
 import outboundManagement from '@/views/pack/outboundManagement'
 import warehousingManagement from '@/views/pack/warehousingManagement'
 import packagingMaterialManagement from '@/views/pack/packagingMaterialManagement'
-
+import Lineresource from '@/views/iae/Lineresource'
+import IaeArrival from '@/views/iae/IaeArrival'
 
 Vue.use(Router)
 
@@ -51,7 +52,16 @@ export default new Router({
         path: '/packagingMaterialManagement',
         name: 'packagingMaterialManagement',
         component: packagingMaterialManagement
-        }
+        },{
+        path: '/iae/Lineresource',
+        name: 'Lineresource',
+        component: Lineresource
+      },
+      {
+        path: '/iae/IaeArrival',
+        name: 'IaeArrival',
+        component: IaeArrival
+      }
 
         ]
     }]

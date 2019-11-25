@@ -280,27 +280,27 @@
             children: [{
                 id: '10-1',
                 text: '出港配载',
-                url: ''
+                url: '/iae/IaeDeparture'
               },
               {
                 id: '10-2',
                 text: '提货管理',
-                url: ''
+                url: 'iae/IaeExtract'
               },
               {
                 id: '10-3',
                 text: '进港分单',
-                url: ''
+                url: '/iae/IaeArrival'
               },
               {
                 id: '10-4',
                 text: '出港配载查询',
-                url: ''
+                url: '/iae/Lineresource'
               },
               {
                 id: '10-5',
                 text: '到达时间录入',
-                url: ''
+                url: '/iae/IaeTimeinput'
               }
             ]
           },
@@ -311,27 +311,27 @@
             children: [{
                 id: '11-1',
                 text: '跟踪表登记',
-                url: ''
+                url: '/log/LogTrack'
               },
               {
                 id: '11-2',
                 text: '跟踪表查询',
-                url: ''
+                url: '/log/SelectLogTrack'
               },
               {
                 id: '11-3',
                 text: '物流交接单查询',
-                url: ''
+                url: '/log/LogLogisticstransfer'
               },
               {
                 id: '11-4',
                 text: '时间统计',
-                url: ''
+                url: '/log/Time'
               },
               {
                 id: '11-5',
                 text: '货量统计',
-                url: ''
+                url: '/log/LogLogistics'
               }
             ]
           }

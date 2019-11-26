@@ -140,12 +140,12 @@
               {
                 id: '4-4',
                 text: '取消签收申请确认',
-                url: ''
+                url: '/dispatch/CancelReceiptOfApplicationConfirmation'
               },
               {
                 id: '4-5',
                 text: '宣传任务',
-                url: ''
+                url: '/dispatch/PropagandaTask'
               }
             ]
           },
@@ -156,17 +156,17 @@
             children: [{
                 id: '5-1',
                 text: '返货申请',
-                url: ''
+                url: '/returnthegoods/ReturnTheGoodsToApplyFor'
               },
               {
                 id: '5-2',
                 text: '返货申请确认',
-                url: ''
+                url: '/returnthegoods/ReturnRequestConfirmation'
               },
               {
                 id: '5-3',
                 text: '生成返货单',
-                url: ''
+                url: '/returnthegoods/GenerateAReturnNote'
               }
             ]
           },

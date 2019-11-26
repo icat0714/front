@@ -30,6 +30,26 @@ export default new Router({
         path: '/dispatch/SignForEntry',
         name: 'SignForEntry',
         component: () => import('@/views/dispatch/SignForEntry')
+  },{
+        path: '/dispatch/PropagandaTask',
+        name: 'PropagandaTask',
+        component: () => import('@/views/dispatch/PropagandaTask')
+  },{
+        path: '/dispatch/CancelReceiptOfApplicationConfirmation',
+        name: 'CancelReceiptOfApplicationConfirmation',
+        component: () => import('@/views/dispatch/CancelReceiptOfApplicationConfirmation')
+  },{
+        path: '/returnthegoods/ReturnTheGoodsToApplyFor',
+        name: 'ReturnTheGoodsToApplyFor',
+        component: () => import('@/views/returnthegoods/ReturnTheGoodsToApplyFor')
+  },{
+        path: '/returnthegoods/ReturnRequestConfirmation',
+        name: 'ReturnRequestConfirmation',
+        component: () => import('@/views/returnthegoods/ReturnRequestConfirmation')
+  },{
+        path: '/returnthegoods/GenerateAReturnNote',
+        name: 'GenerateAReturnNote',
+        component: () => import('@/views/returnthegoods/GenerateAReturnNote')
   }]
   }]
 })

@@ -2,15 +2,19 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/components/common/Main'
 import BookList from '@/views/book/BookList'
+import packagingInformationInput from '@/views/pack/packagingInformationInput'
+import packagingInformationQuery from '@/views/pack/packagingInformationQuery'
+import inventoryManagement from '@/views/pack/inventoryManagement'
+import outboundManagement from '@/views/pack/outboundManagement'
+import warehousingManagement from '@/views/pack/warehousingManagement'
+import packagingMaterialManagement from '@/views/pack/packagingMaterialManagement'
+import Lineresource from '@/views/iae/Lineresource'
+import IaeArrival from '@/views/iae/IaeArrival'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [{
-     path:'/',
-     name:'LoGin',
-     component: () => import('@/components/LoGin')
-  },{
     path: '/Main',
     name: 'Main',
     component: Main,
@@ -50,6 +54,45 @@ export default new Router({
         path: '/returnthegoods/GenerateAReturnNote',
         name: 'GenerateAReturnNote',
         component: () => import('@/views/returnthegoods/GenerateAReturnNote')
-  }]
-  }]
+        },
+        {
+        path: '/packagingInformationInput',
+        name: 'packagingInformationInput',
+        component: packagingInformationInput
+        },
+        {
+        path: '/packagingInformationQuery',
+        name: 'packagingInformationQuery',
+        component: packagingInformationQuery
+        },
+        {
+        path: '/inventoryManagement',
+        name: 'inventoryManagement',
+        component: inventoryManagement
+        },
+        {
+        path: '/outboundManagement',
+        name: 'outboundManagement',
+        component: outboundManagement
+        },
+        {
+        path: '/warehousingManagement',
+        name: 'warehousingManagement',
+        component: warehousingManagement
+        },
+        {
+        path: '/packagingMaterialManagement',
+        name: 'packagingMaterialManagement',
+        component: packagingMaterialManagement
+        },{
+        path: '/iae/Lineresource',
+        name: 'Lineresource',
+        component: Lineresource
+      },
+      {
+        path: '/iae/IaeArrival',
+        name: 'IaeArrival',
+        component: IaeArrival
+      }]
+    }]
 })

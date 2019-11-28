@@ -1,9 +1,9 @@
 <template>
 
   <el-scrollbar>
-    <el-menu router :default-active="this.$route.path"  class="el-menu-vertical-demo" background-color="#334157" text-color="#fff"
+    <el-menu router :default-active="1" class="el-menu-vertical-demo" background-color="#334157" text-color="#fff"
       active-text-color="#ffd04b" :collapse="showLeft" style="height: 1000px;">
-      <el-menu-item index="/main">
+      <el-menu-item index="1">
         <i class="el-icon-s-home"></i>
         <span slot="title">首页</span>
       </el-menu-item>
@@ -125,12 +125,12 @@
             children: [{
                 id: '4-1',
                 text: '查台转单',
-                url: '/dispatch/CheckTableToTurnSingle'
+                url: ''
               },
               {
                 id: '4-2',
                 text: '人工调度',
-                url: '/dispatch/ArtificialScheduling'
+                url: ''
               },
               {
                 id: '4-3',
@@ -177,22 +177,22 @@
             children: [{
                 id: '6-1',
                 text: '包装材料物品管理',
-                url: ''
+                url: '/packagingMaterialManagement'
               },
               {
                 id: '6-2',
                 text: '入库管理',
-                url: ''
+                url: '/warehousingManagement'
               },
               {
                 id: '6-3',
                 text: '出库管理',
-                url: ''
+                url: '/outboundManagement'
               },
               {
                 id: '6-4',
                 text: '库存管理',
-                url: ''
+                url: 'inventoryManagement'
               }
             ]
           },
@@ -203,12 +203,12 @@
             children: [{
                 id: '7-1',
                 text: '包装信息录入',
-                url: ''
+                url: '/packagingInformationInput'
               },
               {
                 id: '7-2',
                 text: '包装信息查询',
-                url: ''
+                url: '/packagingInformationQuery'
               }
             ]
           },
@@ -280,27 +280,27 @@
             children: [{
                 id: '10-1',
                 text: '出港配载',
-                url: ''
+                url: '/iae/IaeDeparture'
               },
               {
                 id: '10-2',
                 text: '提货管理',
-                url: ''
+                url: 'iae/IaeExtract'
               },
               {
                 id: '10-3',
                 text: '进港分单',
-                url: ''
+                url: '/iae/IaeArrival'
               },
               {
                 id: '10-4',
                 text: '出港配载查询',
-                url: ''
+                url: '/iae/Lineresource'
               },
               {
                 id: '10-5',
                 text: '到达时间录入',
-                url: ''
+                url: '/iae/IaeTimeinput'
               }
             ]
           },
@@ -311,27 +311,27 @@
             children: [{
                 id: '11-1',
                 text: '跟踪表登记',
-                url: ''
+                url: '/log/LogTrack'
               },
               {
                 id: '11-2',
                 text: '跟踪表查询',
-                url: ''
+                url: '/log/SelectLogTrack'
               },
               {
                 id: '11-3',
                 text: '物流交接单查询',
-                url: ''
+                url: '/log/LogLogisticstransfer'
               },
               {
                 id: '11-4',
                 text: '时间统计',
-                url: ''
+                url: '/log/Time'
               },
               {
                 id: '11-5',
                 text: '货量统计',
-                url: ''
+                url: '/log/LogLogistics'
               }
             ]
           }

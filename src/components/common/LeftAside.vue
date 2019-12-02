@@ -1,9 +1,9 @@
 <template>
 
   <el-scrollbar>
-    <el-menu router :default-active="1" class="el-menu-vertical-demo" background-color="#334157" text-color="#fff"
+    <el-menu router :default-active="this.$route.path"  class="el-menu-vertical-demo" background-color="#334157" text-color="#fff"
       active-text-color="#ffd04b" :collapse="showLeft" style="height: 1000px;">
-      <el-menu-item index="1">
+      <el-menu-item index="/Main">
         <i class="el-icon-s-home"></i>
         <span slot="title">首页</span>
       </el-menu-item>
@@ -32,7 +32,7 @@
             children: [{
                 id: '1-1',
                 text: '收派标准',
-                url: 'book/BookList'
+                url: ''
               },
               {
                 id: '1-2',
@@ -125,27 +125,27 @@
             children: [{
                 id: '4-1',
                 text: '查台转单',
-                url: ''
+                url: '/dispatch/CheckTableToTurnSingle'
               },
               {
                 id: '4-2',
                 text: '人工调度',
-                url: ''
+                url: '/dispatch/ArtificialScheduling'
               },
               {
                 id: '4-3',
                 text: '签收录入',
-                url: ''
+                url: '/dispatch/SignForEntry'
               },
               {
                 id: '4-4',
                 text: '取消签收申请确认',
-                url: ''
+                url: '/dispatch/CancelReceiptOfApplicationConfirmation'
               },
               {
                 id: '4-5',
                 text: '宣传任务',
-                url: ''
+                url: '/dispatch/PropagandaTask'
               }
             ]
           },
@@ -156,17 +156,17 @@
             children: [{
                 id: '5-1',
                 text: '返货申请',
-                url: ''
+                url: '/returnthegoods/ReturnTheGoodsToApplyFor'
               },
               {
                 id: '5-2',
                 text: '返货申请确认',
-                url: ''
+                url: '/returnthegoods/ReturnRequestConfirmation'
               },
               {
                 id: '5-3',
                 text: '生成返货单',
-                url: ''
+                url: '/returnthegoods/GenerateAReturnNote'
               }
             ]
           },
@@ -177,22 +177,22 @@
             children: [{
                 id: '6-1',
                 text: '包装材料物品管理',
-                url: '/packagingMaterialManagement'
+                url: ''
               },
               {
                 id: '6-2',
                 text: '入库管理',
-                url: '/warehousingManagement'
+                url: ''
               },
               {
                 id: '6-3',
                 text: '出库管理',
-                url: '/outboundManagement'
+                url: ''
               },
               {
                 id: '6-4',
                 text: '库存管理',
-                url: 'inventoryManagement'
+                url: ''
               }
             ]
           },
@@ -203,12 +203,12 @@
             children: [{
                 id: '7-1',
                 text: '包装信息录入',
-                url: '/packagingInformationInput'
+                url: ''
               },
               {
                 id: '7-2',
                 text: '包装信息查询',
-                url: '/packagingInformationQuery'
+                url: ''
               }
             ]
           },
@@ -229,47 +229,47 @@
             children: [{
                 id: '9-1',
                 text: '入库',
-                url: ''
+                url: '/storage'
               },
               {
                 id: '9-2',
                 text: '出库',
-                url: ''
+                url: '/theLibrary'
               },
               {
                 id: '9-3',
                 text: '盘库',
-                url: ''
+                url: '/check'
               },
               {
                 id: '9-4',
                 text: '合库',
-                url: ''
+                url: '/package'
               },
               {
                 id: '9-5',
                 text: '拆库',
-                url: ''
+                url: '/unpacking'
               },
               {
                 id: '9-6',
                 text: '出入库查询',
-                url: ''
+                url: '/outOfStorageQuery'
               },
               {
                 id: '9-7',
                 text: '库存查询',
-                url: ''
+                url: '/stockQuery'
               },
               {
                 id: '9-8',
                 text: '合包查询',
-                url: ''
+                url: '/packageQuery'
               },
               {
                 id: '9-9',
                 text: '单货异常监控',
-                url: ''
+                url: '/singleCargoExceptionMonitoring'
               }
             ]
           },

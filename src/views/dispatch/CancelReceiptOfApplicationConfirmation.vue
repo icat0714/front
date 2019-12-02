@@ -21,24 +21,32 @@
         <el-input style="width: 200px;" placeholder="请输入来电电话" />
         <br /><br />
       </div>
-      <el-table border style="width: 100%">
-        <el-table-column prop="date" label="序号" width="180">
+      <el-table highlight-current-row :data="tableData" border style="width: 100%">
+        <el-table-column prop="id" label="序号" width="180">
         </el-table-column>
-        <el-table-column prop="name" label="工作单号" width="180">
+        <el-table-column prop="worksheetno" label="工作单号" width="180">
         </el-table-column>
         <el-table-column prop="address" label="申请单号">
         </el-table-column>
-        <el-table-column prop="address" label="签收时间">
+        <el-table-column prop="signtime" label="签收时间">
         </el-table-column>
-        <el-table-column prop="address" label="签收状态">
+        <el-table-column prop="signtype" label="签收状态">
+          <template slot-scope="scope">
+            <span v-if="tableData[scope.$index].signtype==1">
+              <el-tag type="success">正常签收</el-tag>
+            </span>
+            <span v-if="tableData[scope.$index].signtype==2">
+              <el-tag type="danger">反向签收</el-tag>
+            </span>
+          </template>
         </el-table-column>
-        <el-table-column prop="address" label="签收单位">
+        <el-table-column prop="syunitssignunit.name" label="签收单位">
         </el-table-column>
-        <el-table-column prop="address" label="申请人">
+        <el-table-column prop="syemp.empname" label="申请人">
         </el-table-column>
-        <el-table-column prop="address" label="申请时间">
+        <el-table-column prop="inputtime" label="申请时间">
         </el-table-column>
-        <el-table-column prop="address" label="申请单位">
+        <el-table-column prop="syunitsinputid.name" label="申请单位">
         </el-table-column>
         <el-table-column prop="address" label="确认人">
         </el-table-column>
@@ -155,6 +163,7 @@
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
     data: function() {
       return {
@@ -163,8 +172,20 @@
         allocation: false,
         details: false,
         more: false,
-        activeName:'first'
+        activeName:'first',
+        tableData : null
       }
+    },
+    created: function() {
+      let url = 'http://localhost:80/Json/DisPatch/SignForEntry/selectAllList';
+      axios.post(url, null).then(resp => {
+        this.tableData = resp.data;
+
+
+      }).catch(error => {
+        console.log(error);
+      });
+
     }
   }
 </script>

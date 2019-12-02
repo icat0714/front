@@ -41,8 +41,12 @@
         </el-table-column>
         <el-table-column prop="invalidatesign" label="作废标志">
           <template slot-scope="scope">
-            <span v-if="tableData[scope.$index].invalidatesign==0"><el-tag type="success">有效</el-tag></span>
-            <span v-if="tableData[scope.$index].invalidatesign==1"><el-tag type="danger">已作废</el-tag></span>
+            <span v-if="tableData[scope.$index].invalidatesign==0">
+              <el-tag type="success">有效</el-tag>
+            </span>
+            <span v-if="tableData[scope.$index].invalidatesign==1">
+              <el-tag type="danger">已作废</el-tag>
+            </span>
           </template>
         </el-table-column>
         <el-table-column prop="returnunit" label="返货单位">
@@ -395,7 +399,15 @@
             DENIALTYPE: this.information.DenialType
           };
           var str = qs.stringify(params);
-          axios.post(url, str).then(resp => {}).catch(error => {
+          axios.post(url, str).then(resp => {
+            axios.post('http://localhost:80/Json/ReturnTheGoods/ReturnTheGoodsToApplyFor/selectAllList', null).then(
+              resp => {
+                this.tableData = resp.data;
+
+              }).catch(error => {
+              console.log(error);
+            });
+          }).catch(error => {
             console.log(error);
           });
           this.$message({
@@ -403,12 +415,7 @@
             type: 'success'
           });
           this.allocation = false;
-          axios.post('http://localhost:80/Json/ReturnTheGoods/ReturnTheGoodsToApplyFor/selectAllList', null).then(resp => {
-            this.tableData = resp.data;
 
-          }).catch(error => {
-            console.log(error);
-          });
 
         } else if (this.title == "修改") {
           let url = "http://localhost/Json/ReturnTheGoods/ReturnTheGoodsToApplyFor/updateRetReturnlist";

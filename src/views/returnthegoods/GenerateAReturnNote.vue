@@ -20,12 +20,26 @@
         <el-input style="width: 200px;" placeholder="请输入来电电话" />
         <br /><br />
       </div>
-      <el-table border style="width: 100%">
-        <el-table-column prop="date" label="序号" width="180">
+      <el-table  @row-click="getTableRow" highlight-current-row  :data="tableData" border style="width: 100%">
+        <el-table-column prop="id" label="序号" width="180">
         </el-table-column>
         <el-table-column prop="name" label="返货状态" width="180">
+          <template slot-scope="scope">
+            <span v-if="tableData[scope.$index].treatmentstate==1">
+              <el-tag type="danger">未确定</el-tag>
+            </span>
+            <span v-if="tableData[scope.$index].treatmentstate==2">
+              <el-tag type="success">同意返货</el-tag>
+            </span>
+            <span v-if="tableData[scope.$index].treatmentstate==3">
+              <el-tag type="warning">拒绝</el-tag>
+            </span>
+            <span v-if="tableData[scope.$index].treatmentstate==4">
+              <el-tag type="success">同意转发</el-tag>
+            </span>
+          </template>
         </el-table-column>
-        <el-table-column prop="address" label="工作单号">
+        <el-table-column prop="worksheetno" label="工作单号">
         </el-table-column>
         <el-table-column prop="address" label="品名">
         </el-table-column>
@@ -103,10 +117,7 @@
               <el-date-picker type="date" placeholder="请选择录入时间">
               </el-date-picker>
             </el-form-item>
-
           </el-row>
-
-
         </el-form>
         <div>
           <el-button @click="allocation = false">取 消</el-button>
@@ -158,6 +169,8 @@
 </template>
 
 <script>
+  import axios from 'axios';
+  import qs from 'qs'
   export default {
     data: function() {
       return {
@@ -166,8 +179,23 @@
         allocation: false,
         details: false,
         more: false,
-        activeName:'first'
+        activeName: 'first',
+        tableData: null
       }
+    },methods:{
+      getTableRow(){
+
+      }
+    },
+    created: function() {
+      let url = 'http://localhost:80/Json/ReturnTheGoods/ReturnTheGoodsToApplyFor/selectAllList';
+      axios.post(url, null).then(resp => {
+        this.tableData = resp.data;
+
+      }).catch(error => {
+        console.log(error);
+      });
+
     }
   }
 </script>

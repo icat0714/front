@@ -97,7 +97,53 @@ export default new Router({
           path: '/iae/IaeArrival',
           name: 'IaeArrival',
           component: IaeArrival
+        },
+        {
+          path:'/storage',
+          name:'storage',
+          component:()=>import('@/views/sortingManagement/storage')
+        },
+        {
+          path:'/theLibrary',
+          name:'theLibrary',
+          component:()=>import('@/views/sortingManagement/theLibrary')
+        },
+        {
+          path:'/check',
+          name:'check',
+          component:()=>import('@/views/sortingManagement/check')
+        },
+        {
+          path:'/package',
+          name:'package',
+          component:()=>import('@/views/sortingManagement/package')
+        },
+        {
+          path:'/unpacking',
+          name:'unpacking',
+          component:()=>import('@/views/sortingManagement/unpacking')
+        },
+        {
+          path:'/outOfStorageQuery',
+          name:'outOfStorageQuery',
+          component:()=>import('@/views/sortingManagement/outOfStorageQuery')
+        },
+        {
+          path:'/stockQuery',
+          name:'stockQuery',
+          component:()=>import('@/views/sortingManagement/stockQuery')
+        },
+        {
+          path:'/packageQuery',
+          name:'packageQuery',
+          component:()=>import('@/views/sortingManagement/packageQuery')
+        },
+        {
+          path:'/singleCargoExceptionMonitoring',
+          name:'singleCargoExceptionMonitoring',
+          component:()=>import('@/views/sortingManagement/singleCargoExceptionMonitoring')
         }
+
       ]
     }
   ]

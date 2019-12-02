@@ -229,47 +229,47 @@
             children: [{
                 id: '9-1',
                 text: '入库',
-                url: ''
+                url: '/storage'
               },
               {
                 id: '9-2',
                 text: '出库',
-                url: ''
+                url: '/theLibrary'
               },
               {
                 id: '9-3',
                 text: '盘库',
-                url: ''
+                url: '/check'
               },
               {
                 id: '9-4',
                 text: '合库',
-                url: ''
+                url: '/package'
               },
               {
                 id: '9-5',
                 text: '拆库',
-                url: ''
+                url: '/unpacking'
               },
               {
                 id: '9-6',
                 text: '出入库查询',
-                url: ''
+                url: '/outOfStorageQuery'
               },
               {
                 id: '9-7',
                 text: '库存查询',
-                url: ''
+                url: '/stockQuery'
               },
               {
                 id: '9-8',
                 text: '合包查询',
-                url: ''
+                url: '/packageQuery'
               },
               {
                 id: '9-9',
                 text: '单货异常监控',
-                url: ''
+                url: '/singleCargoExceptionMonitoring'
               }
             ]
           },

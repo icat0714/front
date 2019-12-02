@@ -1,17 +1,13 @@
 <template>
   <div>
-    <!--搜索框-->
+    <!--搜索框         this的指向问题      -->
     <el-form :inline="true" class="demo-form-inline" style="margin-top: 20px;margin-left: 30px;">
       <el-divider content-position="left">库存管理</el-divider>
       <el-form-item label="货物编码:">
         <el-input v-model="goodscode" placeholder="请输入货物编码"></el-input>
       </el-form-item>
-      <el-form-item label="所属单位:">
-        <el-select v-model="measurementunit" placeholder="全部">
-          <el-option label="部门一" :value="1"></el-option>
-          <el-option label="部门二" :value="2"></el-option>
-          <el-option label="部门三" :value="3"></el-option>
-        </el-select>
+      <el-form-item label="货物名称:">
+        <el-input v-model="goodsname" placeholder="请输入货物名称"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="doSubmit()" icon="el-icon-search">查询</el-button>
@@ -35,15 +31,14 @@
       <!--数据表格-->
       <el-table :data="data1" style=" margin-top:10px;width: 100%;" :border="true" max-height="550">
         <el-table-column prop="id" label="序号" min-width="20" align="center"></el-table-column>
-        <el-table-column prop="pacStockitem.goodscode" label="货物编码" min-width="50" align="center"></el-table-column>
-        <el-table-column prop="pacStockitem.goodsname" label="货物名称" min-width="50" align="center"></el-table-column>
-        <el-table-column prop="pacStockitem.actualnum" label="数量" min-width="50" align="center"></el-table-column>
-        <el-table-column prop="pacStockitem.plannedprice" label="计划价格" min-width="40" align="center"></el-table-column>
-        <el-table-column prop="pacStockitem.specifications" label="规格" min-width="40" align="center"></el-table-column>
-        <el-table-column prop="pacStockitem.type" label="类型" min-width="40" align="center"></el-table-column>
-        <el-table-column prop="pacStockitem.measurementunit" label="计量单位" min-width="40" align="center"></el-table-column>
-        <el-table-column prop="pacStockitem.plannedprice" label="金额" min-width="40" align="center"></el-table-column>
-        <el-table-column prop="subordinateunit" label="所属单位" min-width="40" align="center"></el-table-column>
+        <el-table-column prop="goodscode" label="货物编码" min-width="50" align="center"></el-table-column>
+        <el-table-column prop="goodsname" label="货物名称" min-width="50" align="center"></el-table-column>
+        <el-table-column prop="actualnum" label="数量" min-width="50" align="center"></el-table-column>
+        <el-table-column prop="plannedprice" label="计划价格" min-width="40" align="center"></el-table-column>
+        <el-table-column prop="specifications" label="规格" min-width="40" align="center"></el-table-column>
+        <el-table-column prop="type" label="类型" min-width="40" align="center"></el-table-column>
+        <el-table-column prop="measurementunit" label="计量单位" min-width="40" align="center"></el-table-column>
+        <el-table-column prop="plannedprice" label="金额" min-width="40" align="center"></el-table-column>
       </el-table>
     </el-form>
   </div>
@@ -57,7 +52,7 @@
     data: function() {
       return {
         goodscode: null,
-        measurementunit: null,
+        goodsname:null,
         specifications: null,
         stocktype: null,
         show: false,
@@ -69,7 +64,7 @@
     methods: {
       //查询全部的方法
       findAll: function() {
-        let url = 'http://localhost/Stock/findAllStock';
+        let url = 'http://localhost/StockItem/findAll';
         axios.post(url, null).then(resp => {
           this.data = resp.data;
           this.result = resp.data;
@@ -98,16 +93,16 @@
           this.findAll();
         }
         if (this.goodscode != null && this.goodscode != "") {
-          this.data1 = this.data1.filter(f => f.pacStockitem.goodscode.indexOf(this.goodscode) != -1);
+          this.data1 = this.data1.filter(f => f.goodscode.indexOf(this.goodscode) != -1);
         }
-        if (this.measurementunit != null && this.measurementunit != "") {
-          this.data1 = this.data1.filter(a => a.pacStockitem.measurementunit.indexOf(this.measurementunit) != -1);
+        if (this.goodsname != null && this.goodsname != "") {
+          this.data1 = this.data1.filter(a => a.goodsname.indexOf(this.goodsname) != -1);
         }
         if (this.specifications != null && this.specifications != "") {
-          this.data1 = this.data1.filter(b => b.pacStockitem.specifications.indexOf(this.specifications) != -1);
+          this.data1 = this.data1.filter(b => b.specifications.indexOf(this.specifications) != -1);
         }
         if (this.stocktype != null && this.stocktype != "") {
-          this.data1 = this.data1.filter(e => e.pacStockitem.type.indexOf(this.stocktype) != -1);
+          this.data1 = this.data1.filter(e => e.type.indexOf(this.stocktype) != -1);
         }
         return this.data1;
         /* this.goodscode=null;
@@ -118,8 +113,9 @@
     },
     //查询全部
     created: function() {
-      let url = 'http://localhost/Stock/findAllStock';
+      let url = 'http://localhost/StockItem/findAll';
       axios.post(url, null).then(resp => {
+        //console.log(resp.data)
         this.data1 = resp.data;
         this.result = resp.data;
       }).catch(error => {

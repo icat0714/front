@@ -9,7 +9,7 @@
       <el-button type="primary" icon="el-icon-refresh">重置</el-button>
       <el-button type="primary" @click="more = !more" icon="el-icon-refresh">更多</el-button>
       <el-button type="primary" @click="allocation = true">分配</el-button>
-      <el-button type="primary" @click="resellVisible = true">退回</el-button>
+      <!-- <el-button type="primary" @click="resellVisible = true">退回</el-button> -->
       <el-button type="primary" @click="resellVisible = true">销单</el-button>
       <el-button type="primary" @click="details = true">详情</el-button>
     </el-header>

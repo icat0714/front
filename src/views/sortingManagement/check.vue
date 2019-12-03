@@ -85,7 +85,7 @@
         <el-row :gutter="5">
           <el-col :span="8">
             <div class="grid-content bg-purple"><label>入库时间</label>
-              <el-date-picker v-model="form.CHECKDATE" align="center" type="date" placeholder="入库时间" :picker-options="pickerOptions"
+              <el-date-picker v-model="form.CHECKDATE" align="center" type="date" placeholder="入库时间"
                 style="width: 100px;">
               </el-date-picker>
             </div>
@@ -191,7 +191,7 @@
 
           <el-col :span="2">
             <div class="grid-content bg-purple">
-              <el-date-picker v-model="form1.time" align="center" type="date" placeholder="入库时间" :picker-options="pickerOptions"
+              <el-date-picker v-model="form1.time" align="center" type="date" placeholder="入库时间"
                 style="width: 100px;">
               </el-date-picker>
             </div>
@@ -204,6 +204,34 @@
         <el-button @click="dialogFormVisible = false">取 消</el-button>
         <el-button type="primary" @click="addCheck">确 定</el-button>
       </div>
+    </el-dialog>
+
+
+
+    <el-dialog title="明细数据" :visible.sync="dialogFormVisible1">
+      <el-table :data="tableData1">
+
+        <el-table-column prop="id" label="工作单号" width="180">
+        </el-table-column>
+        <el-table-column prop="packageid" label="合包号">
+        </el-table-column>
+        <el-table-column prop="cargocount" label="件数" width="180">
+        </el-table-column>
+        <el-table-column prop="weight" label="重量" width="180">
+        </el-table-column>
+        <el-table-column prop="volume" label="体积" width="180">
+        </el-table-column>
+        <el-table-column prop="cargotype" label="类型" width="180">
+        </el-table-column>
+        <el-table-column prop="direction" label="方向" width="180">
+        </el-table-column>
+        <el-table-column prop="storageperson" label="入库人" width="180">
+        </el-table-column>
+        <el-table-column prop="storagedate" label="入库时间" width="180">
+        </el-table-column>
+
+
+      </el-table>
     </el-dialog>
 
 
@@ -223,6 +251,7 @@
         formInline: {
           name: ''
         },
+        tableData1: [],
         tableData: [{
           date: '2016-05-02',
           name: '王小虎',
@@ -242,6 +271,7 @@
         }],
         gengDuo: false,
         dialogFormVisible: false,
+        dialogFormVisible1:false,
         form: {
           name: null,
           SCANID: null,
@@ -252,15 +282,15 @@
         },
         form1: {
           name: null,
-          ID:null,
-          PACKAGEID:null,
-          CARGOCOUNT:null,
-          WEIGHT:null,
-          VOLUME:null,
-          CARGOTYPE:null,
-          DIRECTION:null,
-          STORAGEPERSON:null,
-          time:null
+          ID: null,
+          PACKAGEID: null,
+          CARGOCOUNT: null,
+          WEIGHT: null,
+          VOLUME: null,
+          CARGOTYPE: null,
+          DIRECTION: null,
+          STORAGEPERSON: null,
+          time: null
         }
 
       }
@@ -271,23 +301,49 @@
 
       },
       handleEdit: function(row) {
-        console.log(row);
+
       },
       handleDelete: function(row) {
-        console.log(row);
+        let param = {
+          ID: row.id
+        }
+
+        axios.post("http://localhost/deleteSorCheckbound", qs.stringify(param)).then(resp => {
+          console.log(resp.data);
+          this.form1.ID = resp.data;
+        }).catch(error => {
+          console.log(error);
+        });
+        axios.post("http://localhost/deleteSorCheckbounddetails", qs.stringify(param)).then(resp => {
+          console.log(resp.data);
+          this.form1.ID = resp.data;
+        }).catch(error => {
+          console.log(error);
+        });
+
       },
       handleSelectionChange: function() {
 
       },
-      ckmx: function() {
+      ckmx: function(row) {
+        let param = {
+          ID: row.id
+        }
 
+        axios.post("http://localhost/json_SorCheckbounddetails", qs.stringify(param)).then(resp => {
+          console.log(resp.data);
+          this.tableData1=resp.data;
+        }).catch(error => {
+          console.log(error);
+        });
+        this.dialogFormVisible1=true;
       },
       addCheck: function() {
         this.dialogFormVisible = false;
 
         axios.post("http://localhost/insertSorCheckbound", qs.stringify(this.form)).then(resp => {
           console.log(resp.data);
-          this.form1.ID=resp.data;
+          this.form1.ID = resp.data;
         }).catch(error => {
           console.log(error);
         });
@@ -309,6 +365,14 @@
       }).catch(error => {
         console.log(error);
       });
+    },
+    computed:{
+      ppp:function(){
+        if(this.dialogFormVisible1==false){
+          this.tableData1=null;
+        }
+        return null;
+      }
     }
 
 

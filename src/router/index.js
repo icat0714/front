@@ -104,44 +104,44 @@ export default new Router({
           component: IaeArrival
         },
         {
-          path:'/storage',
-          name:'storage',
-          component:()=>import('@/views/sortingManagement/storage')
+          path: '/storage',
+          name: 'storage',
+          component: () => import('@/views/sortingManagement/storage')
         },
         {
-          path:'/theLibrary',
-          name:'theLibrary',
-          component:()=>import('@/views/sortingManagement/theLibrary')
+          path: '/theLibrary',
+          name: 'theLibrary',
+          component: () => import('@/views/sortingManagement/theLibrary')
         },
         {
-          path:'/check',
-          name:'check',
-          component:()=>import('@/views/sortingManagement/check')
+          path: '/check',
+          name: 'check',
+          component: () => import('@/views/sortingManagement/check')
         },
         {
-          path:'/package',
-          name:'package',
-          component:()=>import('@/views/sortingManagement/package')
+          path: '/package',
+          name: 'package',
+          component: () => import('@/views/sortingManagement/package')
         },
         {
-          path:'/unpacking',
-          name:'unpacking',
-          component:()=>import('@/views/sortingManagement/unpacking')
+          path: '/unpacking',
+          name: 'unpacking',
+          component: () => import('@/views/sortingManagement/unpacking')
         },
         {
-          path:'/outOfStorageQuery',
-          name:'outOfStorageQuery',
-          component:()=>import('@/views/sortingManagement/outOfStorageQuery')
+          path: '/outOfStorageQuery',
+          name: 'outOfStorageQuery',
+          component: () => import('@/views/sortingManagement/outOfStorageQuery')
         },
         {
-          path:'/stockQuery',
-          name:'stockQuery',
-          component:()=>import('@/views/sortingManagement/stockQuery')
+          path: '/stockQuery',
+          name: 'stockQuery',
+          component: () => import('@/views/sortingManagement/stockQuery')
         },
         {
-          path:'/packageQuery',
-          name:'packageQuery',
-          component:()=>import('@/views/sortingManagement/packageQuery')
+          path: '/packageQuery',
+          name: 'packageQuery',
+          component: () => import('@/views/sortingManagement/packageQuery')
         },
         {
           path:'/singleCargoExceptionMonitoring',
@@ -162,6 +162,34 @@ export default new Router({
           path: '/UnitsManage',
           name: 'UnitsManage',
           component: UnitsManage
+          path: '/singleCargoExceptionMonitoring',
+          name: 'singleCargoExceptionMonitoring',
+          component: () => import('@/views/sortingManagement/singleCargoExceptionMonitoring')
+        },
+        {
+          path: '/deliveryStandard',
+          name: 'deliveryStandard',
+          component: () => import('@/views/basicData/deliveryStandard')
+        },
+        {
+          path: '/basicArchives',
+          name: 'basicArchives',
+          component: () => import('@/views/basicData/basicArchives')
+        },
+        {
+          path: '/shuttleBusSet',
+          name: 'shuttleBusSet',
+          component: () => import('@/views/basicData/shuttleBusSet')
+        },
+        {
+          path: '/dispatchingPersonnelSet',
+          name: 'dispatchingPersonnelSet',
+          component: () => import('@/views/basicData/dispatchingPersonnelSet')
+        },
+        {
+          path: '/areaSet',
+          name: 'areaSet',
+          component: () => import('@/views/basicData/areaSet')
         }
 
       ]

@@ -32,27 +32,27 @@
             children: [{
                 id: '1-1',
                 text: '收派标准',
-                url: ''
+                url: '/deliveryStandard'
               },
               {
                 id: '1-2',
                 text: '基础档案',
-                url: ''
+                url: '/basicArchives'
               },
               {
                 id: '1-3',
                 text: '班车设置',
-                url: ''
+                url: '/shuttleBusSet'
               },
               {
                 id: '1-4',
                 text: '取派设置',
-                url: ''
+                url: '/dispatchingPersonnelSet'
               },
               {
                 id: '1-5',
                 text: '区域设置',
-                url: ''
+                url: '/areaSet'
               },
               {
                 id: '1-6',

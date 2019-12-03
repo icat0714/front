@@ -9,8 +9,8 @@
       <el-button type="primary" icon="el-icon-refresh">重置</el-button>
       <el-button type="primary" @click="more = !more" icon="el-icon-refresh">更多</el-button>
       <el-button type="primary" @click="allocation = true">分配</el-button>
-      <el-button type="primary" @click="resellVisible = true">退回</el-button>
-      <el-button type="primary" @click="resellVisible = true">销单</el-button>
+      <!-- <el-button type="primary" @click="resellVisible = true">退回</el-button> -->
+      <el-button type="primary" @click="Singlepin">销单</el-button>
       <el-button type="primary" @click="details = true">详情</el-button>
     </el-header>
     <el-main>
@@ -21,7 +21,7 @@
         <el-input style="width: 200px;" placeholder="请输入来电电话" />
         <br /><br />
       </div>
-      <el-table highlight-current-row :data="tableData" border style="width: 100%">
+      <el-table @row-click="getTableRow" highlight-current-row :data="tableData" border style="width: 100%">
         <el-table-column prop="id" label="序号" width="180">
         </el-table-column>
         <el-table-column prop="businessnoticeno" label="通知单号" width="180">
@@ -83,6 +83,7 @@
 
 <script>
   import axios from 'axios';
+  import qs from 'qs';
   export default {
     data: function() {
       return {
@@ -92,7 +93,34 @@
         details: false,
         activeName: 'first',
         more: false,
-        tableData:null
+        tableData: null,
+        BusinessNoticeNo: null
+      }
+    },
+    methods: {
+      Singlepin() {
+        let params = {
+          BusinessNoticeNo: this.BusinessNoticeNo
+        }
+        var str = qs.stringify(params);
+        let url = 'http://localhost:80//Json/ArtificialScheduling/singlePin';
+        axios.post(url, str).then(resp => {
+          this.$message({
+            message: '更新成功',
+            type: 'success'
+          });
+          let url = 'http://localhost:80/Json/ArtificialScheduling/selectAllList';
+          axios.post(url, null).then(resp => {
+            console.log(resp.data);
+            this.tableData = resp.data;
+          }).catch(error => {
+            console.log(error);
+          });
+        }).catch(error => {
+          console.log(error);
+        });
+      },getTableRow(row) {
+        this.BusinessNoticeNo=row.businessnoticeno;
       }
     },
     created: function() {

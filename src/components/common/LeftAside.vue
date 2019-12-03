@@ -32,27 +32,27 @@
             children: [{
                 id: '1-1',
                 text: '收派标准',
-                url: 'book/BookList'
+                url: '/deliveryStandard'
               },
               {
                 id: '1-2',
                 text: '基础档案',
-                url: ''
+                url: '/basicArchives'
               },
               {
                 id: '1-3',
                 text: '班车设置',
-                url: ''
+                url: '/shuttleBusSet'
               },
               {
                 id: '1-4',
                 text: '取派设置',
-                url: ''
+                url: '/dispatchingPersonnelSet'
               },
               {
                 id: '1-5',
                 text: '区域设置',
-                url: ''
+                url: '/areaSet'
               },
               {
                 id: '1-6',
@@ -125,27 +125,27 @@
             children: [{
                 id: '4-1',
                 text: '查台转单',
-                url: ''
+                url: '/dispatch/CheckTableToTurnSingle'
               },
               {
                 id: '4-2',
                 text: '人工调度',
-                url: ''
+                url: '/dispatch/ArtificialScheduling'
               },
               {
                 id: '4-3',
                 text: '签收录入',
-                url: ''
+                url: '/dispatch/SignForEntry'
               },
               {
                 id: '4-4',
                 text: '取消签收申请确认',
-                url: ''
+                url: '/dispatch/CancelReceiptOfApplicationConfirmation'
               },
               {
                 id: '4-5',
                 text: '宣传任务',
-                url: ''
+                url: '/dispatch/PropagandaTask'
               }
             ]
           },
@@ -161,12 +161,12 @@
               {
                 id: '5-2',
                 text: '返货申请确认',
-                url: ''
+                url: '/returnthegoods/ReturnRequestConfirmation'
               },
               {
                 id: '5-3',
                 text: '生成返货单',
-                url: ''
+                url: '/returnthegoods/GenerateAReturnNote'
               }
             ]
           },
@@ -219,7 +219,7 @@
             children: [{
               id: '8-1',
               text: '大物流发货对照表',
-              url: '/iae/logistics'
+              url: ''
             }]
           },
           {
@@ -244,32 +244,32 @@
               {
                 id: '9-4',
                 text: '合库',
-                url: ''
+                url: '/package'
               },
               {
                 id: '9-5',
                 text: '拆库',
-                url: ''
+                url: '/unpacking'
               },
               {
                 id: '9-6',
                 text: '出入库查询',
-                url: ''
+                url: '/outOfStorageQuery'
               },
               {
                 id: '9-7',
                 text: '库存查询',
-                url: ''
+                url: '/stockQuery'
               },
               {
                 id: '9-8',
                 text: '合包查询',
-                url: ''
+                url: '/packageQuery'
               },
               {
                 id: '9-9',
                 text: '单货异常监控',
-                url: ''
+                url: '/singleCargoExceptionMonitoring'
               }
             ]
           },

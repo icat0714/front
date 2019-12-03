@@ -219,7 +219,7 @@
             children: [{
               id: '8-1',
               text: '大物流发货对照表',
-              url: ''
+              url: '/iae/logistics'
             }]
           },
           {
@@ -285,7 +285,7 @@
               {
                 id: '10-2',
                 text: '提货管理',
-                url: 'iae/IaeExtract'
+                url: '/iae/IaeExtract'
               },
               {
                 id: '10-3',

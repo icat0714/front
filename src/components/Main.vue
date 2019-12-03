@@ -6,7 +6,7 @@
           <div class="user-info">
             <img src="../assets/img/img.jpg" class="user-avator" alt />
             <div class="user-info-cont">
-              <div class="user-info-name">夏</div>
+              <div class="user-info-name">{{user.empname}}</div>
               <div>管理员</div>
             </div>
           </div>
@@ -99,6 +99,17 @@
     name: 'dashboard',
     data() {
       return {
+        user: {
+          id: null,
+          empunit: null,
+          remark: null,
+          empno: null,
+          pwd: null,
+          disabled: null,
+          empname: null,
+          roleid: null,
+          querypwd: null
+        },
         name: localStorage.getItem('ms_username'),
         todoList: [{
             title: '今天要修复100个bug',
@@ -196,6 +207,11 @@
           ]
         }
       };
+    },
+    created: function() {
+       this.user=JSON.parse(sessionStorage.getItem("user"));
+
+
     }
 
 

@@ -1,12 +1,12 @@
 <template>
   <div class="login-wrap">
-    <el-form class="login-container">
+    <el-form class="login-container" v-model="form">
       <h2 class="title">用户登录页面</h2>
       <el-form-item label="用户账号" prop="pass">
-        <el-input type="text" v-model="name" placeholder="用户账号" autocomplete="off"></el-input>
+        <el-input type="text" v-model="form.EMPNAME" placeholder="用户账号" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="checkPass">
-        <el-input type="password" v-model="pwd" placeholder="密码" autocomplete="off"></el-input>
+        <el-input type="password" v-model="form.PWD" placeholder="密码" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" style="width: 100%;" @click="submitForm()">提交</el-button>
@@ -21,16 +21,35 @@
   export default {
     data() {
       return {
-        name: null,
-        pwd: null
+        form: {
+          EMPNAME: null,
+          PWD: null
+        },
+        user: {}
 
       }
     },
     methods: {
       submitForm: function() {
-        this.$router.push({
-                    path:'/Main'
-                  });
+        let param = {
+          EMPNAME: this.form.EMPNAME,
+          PWD: this.form.PWD
+        };
+        axios.post("http://localhost/login", qs.stringify(this.form)).then(resp => {
+          if(resp.data.id==null){
+            this.$message.error('登录失败，用户名或密码错误！！');
+          }else{
+            let objStr = JSON.stringify(resp.data)
+            sessionStorage.setItem('user',[objStr])
+            this.$router.push({
+              path: '/Main'
+            });
+          }
+
+        }).catch(error => {
+          console.log(error);
+        });
+
 
       }
     }

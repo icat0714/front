@@ -10,6 +10,11 @@ import packagingMaterialManagement from '@/views/pack/packagingMaterialManagemen
 import Lineresource from '@/views/iae/Lineresource'
 import IaeArrival from '@/views/iae/IaeArrival'
 
+import columnManage from '@/views/power/columnManage'
+import EmpManage from '@/views/power/EmpManage'
+import UnitsManage from '@/views/power/UnitsManage'
+
+
 Vue.use(Router)
 
 export default new Router({
@@ -142,6 +147,21 @@ export default new Router({
           path:'/singleCargoExceptionMonitoring',
           name:'singleCargoExceptionMonitoring',
           component:()=>import('@/views/sortingManagement/singleCargoExceptionMonitoring')
+        },
+        {
+          path: '/columnManage',
+          name: 'columnManage',
+          component: columnManage
+        },
+        {
+          path: '/EmpManage',
+          name: 'EmpManage',
+          component: EmpManage
+        },
+        {
+          path: '/UnitsManage',
+          name: 'UnitsManage',
+          component: UnitsManage
         }
 
       ]

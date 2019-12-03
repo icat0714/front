@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <!--搜索框      高级查询状态有bug       -->
+    <!--搜索框           -->
     <el-form :inline="true" class="demo-form-inline" style="margin-top: 20px;margin-left: 30px;">
       <el-divider content-position="left">包装材料物品管理</el-divider>
       <el-form-item label="物品编码:">
@@ -20,21 +20,12 @@
         <el-button type="info" @click="show = !show" icon="el-icon-more-outline">更多</el-button>
       </el-form-item><br />
       <div v-if="show">
-        <el-form-item label="计划价格:">
-          <el-input v-model="plannedprice" placeholder="请输入计划价格"></el-input>
-        </el-form-item>
         <el-form-item label="规格:" style="margin-left: 27px;">
           <el-input v-model="specifications" placeholder="请输入规格"></el-input>
         </el-form-item>
         <el-form-item label="类型:">
           <el-input v-model="type" placeholder="请输入类型"></el-input>
         </el-form-item>
-        <el-form-item label="状态:">
-          <el-select v-model="status" placeholder="全部">
-            <el-option label="正常" :value="1"></el-option>
-            <el-option label="作废" :value="2"></el-option>
-          </el-select>
-        </el-form-item><br />
       </div>
       <el-button type="primary" @click="handleInsert()" icon="el-icon-plus">新增</el-button>
       <!--数据表格-->
@@ -47,7 +38,7 @@
         <el-table-column prop="type" label="类型" min-width="40" align="center"></el-table-column>
         <el-table-column prop="measurementunit" label="计量单位" min-width="40" align="center"></el-table-column>
         <el-table-column prop="status" label="状态" min-width="40" align="center">
-            <template scope="scope">
+            <template slot-scope="scope">
                 <p v-if="scope.row.status=='1'">正常</p>
                 <p v-if="scope.row.status=='2'">作废</p>
             </template>

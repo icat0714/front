@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!--搜索框         this的指向问题      -->
+    <!--搜索框         this的指向问题   输入框得手动删除      -->
     <el-form :inline="true" class="demo-form-inline" style="margin-top: 20px;margin-left: 30px;">
       <el-divider content-position="left">库存管理</el-divider>
       <el-form-item label="货物编码:">
@@ -10,7 +10,7 @@
         <el-input v-model="goodsname" placeholder="请输入货物名称"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="doSubmit()" icon="el-icon-search">查询</el-button>
+        <el-button type="primary" @click="doSubmit" icon="el-icon-search">查询</el-button>
       </el-form-item>
       <el-form-item>
         <el-button type="info" @click="clearFrom" icon="el-icon-minus">重置</el-button>
@@ -21,9 +21,6 @@
       <div v-if="show">
         <el-form-item label="规格:" style="margin-left: 27px;">
           <el-input v-model="specifications" placeholder="请输入规格"></el-input>
-        </el-form-item>
-        <el-form-item label="类型:" style="margin-left: 28px;">
-          <el-input v-model="stocktype" placeholder="请输入类型"></el-input>
         </el-form-item>
         <br />
       </div>
@@ -54,7 +51,6 @@
         goodscode: null,
         goodsname:null,
         specifications: null,
-        stocktype: null,
         show: false,
         data1: [],
         //对象
@@ -84,12 +80,11 @@
         this.goodscode = null;
         this.measurementunit = null;
         this.specifications = null;
-        this.type = null;
       },
       //多条件查询
       doSubmit: function() {
         this.data1 = this.result;
-        if (this.goodscode == null && this.measurementunit == null && this.specifications == null && this.type == null) {
+        if (this.goodscode == null && this.goodsname == null && this.specifications == null ) {
           this.findAll();
         }
         if (this.goodscode != null && this.goodscode != "") {
@@ -100,9 +95,6 @@
         }
         if (this.specifications != null && this.specifications != "") {
           this.data1 = this.data1.filter(b => b.specifications.indexOf(this.specifications) != -1);
-        }
-        if (this.stocktype != null && this.stocktype != "") {
-          this.data1 = this.data1.filter(e => e.type.indexOf(this.stocktype) != -1);
         }
         return this.data1;
         /* this.goodscode=null;

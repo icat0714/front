@@ -1,25 +1,20 @@
 <template>
   <div>
 
-    <!--搜索框         高级查询         -->
+    <!--搜索框  -->
     <el-form :inline="true" class="demo-form-inline" style="margin-top: 20px;margin-left: 30px;">
       <el-divider content-position="left">入库管理</el-divider>
       <el-form-item label="入库单号:">
         <el-input v-model="warehouseno" placeholder="请输入入库单号"></el-input>
       </el-form-item>
-      <el-form-item label="入库类型:">
-        <el-select v-model="reservoirtype" placeholder="全部">
-          <el-option label="期初库存" value="1"></el-option>
-          <el-option label="调拨入库" value="2"></el-option>
-          <el-option label="下发入库" value="3"></el-option>
-          <el-option label="盘盈调整" value="4"></el-option>
-        </el-select>
+      <el-form-item label="开单人姓名:">
+        <el-input v-model="drawername" placeholder="请输入开单人姓名"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" icon="el-icon-search">查询</el-button>
+        <el-button type="primary" icon="el-icon-search" @click="doSubmit5">查询</el-button>
       </el-form-item>
       <el-form-item>
-        <el-button type="info" icon="el-icon-minus">重置</el-button>
+        <el-button type="info" icon="el-icon-minus" @click="cleanInput">重置</el-button>
       </el-form-item>
       <el-form-item>
         <el-button type="info" @click="show = !show" icon="el-icon-more-outline">更多</el-button>
@@ -28,20 +23,10 @@
       <el-form-item label="运输单号:" >
         <el-input v-model="transport" placeholder="请输入运输单号"></el-input>
       </el-form-item>
-      <el-form-item v-model="subordinateunit" label="所属单位:">
-       <el-select placeholder="全部">
-         <el-option label="部门一" value="1"></el-option>
-         <el-option label="部门二" value="2"></el-option>
-         <el-option label="部门三" value="3"></el-option>
-       </el-select>
-       </el-form-item>
-      <el-form-item label="开单时间:">
-         <el-input v-model="drawertime" placeholder="请输入开单时间"></el-input>
-      </el-form-item>
       </div>
       <el-button type="primary" @click="handleInsert" icon="el-icon-plus">新增</el-button>
       <!--数据表格           v-if="show"    -->
-      <el-table :data="result" style=" margin-top:10px;width: 100%;" :border="true" max-height="550">
+      <el-table :data="data1" style=" margin-top:10px;width: 100%;" :border="true" max-height="550">
         <el-table-column prop="id" label="序号" min-width="20" align="center"></el-table-column>
         <el-table-column prop="warehouseno" label="入库单号" min-width="50" align="center"></el-table-column>
         <el-table-column prop="reservoirtype" label="入库类型" min-width="40" align="center"></el-table-column>
@@ -332,13 +317,9 @@
     data: function() {
       return {
         warehouseno:null,
-        reservoirtype:null,
         transport:null,
-        subordinateunit:null,
         status:'1',
-        goodscode:null,
-        goodsname:null,
-        drawertime:null,
+        drawername:null,
         show:false,
         result:[],
         data1:[],
@@ -378,6 +359,7 @@
       let url = 'http://localhost/Stock/findAllStock';
       axios.post(url, null).then(resp => {
         this.result = resp.data;
+        this.data1 = resp.data;
       }).catch(error => {
         console.log(error);
       });
@@ -513,6 +495,7 @@
         let url = 'http://localhost/Stock/findAllStock';
         axios.post(url, null).then(resp => {
           this.result = resp.data;
+          this.data1 = resp.data;
         }).catch(error => {
           console.log(error);
         });
@@ -639,6 +622,28 @@
             return false;
             }
         });
+      },
+      //多条件查询
+      doSubmit5: function() {
+          this.data1 = this.result;
+          if (this.warehouseno == null && this.reservoirtype == null && this.transport == null ) {
+            this.findAll();
+          }
+          if (this.warehouseno != null && this.warehouseno != "") {
+            this.data1 = this.data1.filter(f => f.warehouseno.indexOf(this.warehouseno) != -1);
+          }
+          if (this.drawername != null && this.drawername != "") {
+            this.data1 = this.data1.filter(a => a.drawername.indexOf(this.drawername) != -1);
+          }
+          if (this.transport != null && this.transport != "") {
+            this.data1 = this.data1.filter(b => b.transport.indexOf(this.transport) != -1);
+          }
+          return this.data1;
+      },
+      cleanInput:function(){
+        this.warehouseno=null;
+        this.drawername=null;
+        this.transport=null;
       }
     }
 

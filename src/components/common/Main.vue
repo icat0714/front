@@ -1,12 +1,14 @@
 <template>
   <el-container class="main-container">
-      <LeftAside :show-collapsed="collapsed" ></LeftAside>
+    <LeftAside :show-collapsed="collapsed"></LeftAside>
     <el-container>
-      <el-header  class="main-header">
-        <TopNav  @showCollapsed="getCollapsed"></TopNav>
+      <el-header class="main-header">
+        <TopNav @showCollapsed="getCollapsed"></TopNav>
       </el-header>
-      <el-main class="main-center"><router-view></router-view></el-main>
-      
+      <el-main class="main-center">
+        <router-view></router-view>
+      </el-main>
+
     </el-container>
   </el-container>
 </template>
@@ -20,7 +22,18 @@
   export default {
     data: function() {
       return {
-        collapsed: true
+        collapsed: true,
+        user: {
+          id: null,
+          empunit: null,
+          remark: null,
+          empno: null,
+          pwd: null,
+          disabled: null,
+          empname: null,
+          roleid: null,
+          querypwd: null
+        }
       }
     },
     components: { //注册组件
@@ -36,6 +49,16 @@
       showLeftAside: function() {
         return !this.collapsed ? 'main-aside' : 'main-aside-collapsed'
       }
+    },
+    created: function() {
+
+      if (sessionStorage.getItem("user") == '' || sessionStorage.getItem("user") == null) {
+        this.$message.error('未登录，请先登录！！');
+        this.$router.push({
+          path: '/'
+        });
+      }
+
     }
   };
 </script>

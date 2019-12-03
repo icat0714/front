@@ -47,7 +47,7 @@
         <el-table-column prop="type" label="类型" min-width="40" align="center"></el-table-column>
         <el-table-column prop="measurementunit" label="计量单位" min-width="40" align="center"></el-table-column>
         <el-table-column prop="status" label="状态" min-width="40" align="center">
-            <template scope="scope">
+            <template slot-scope="scope">
                 <p v-if="scope.row.status=='1'">正常</p>
                 <p v-if="scope.row.status=='2'">作废</p>
             </template>

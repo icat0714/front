@@ -24,9 +24,9 @@
         </el-form-item>
         <br />
       </div>
-      <el-button type="primary" @click="derive" icon="el-icon-sort">导出</el-button>
+      <el-button type="primary" @click="exportExcel" icon="el-icon-sort">导出</el-button>
       <!--数据表格-->
-      <el-table :data="data1" style=" margin-top:10px;width: 100%;" :border="true" max-height="550">
+      <el-table :data="data1" style=" margin-top:10px;width: 100%;" :border="true" max-height="550" id="rebateSetTable">
         <el-table-column prop="id" label="序号" min-width="20" align="center"></el-table-column>
         <el-table-column prop="goodscode" label="货物编码" min-width="50" align="center"></el-table-column>
         <el-table-column prop="goodsname" label="货物名称" min-width="50" align="center"></el-table-column>
@@ -44,12 +44,14 @@
 <script>
   import axios from 'axios'
   import qs from 'qs'
+  import FileSaver from 'file-saver'
+  import XLSX from 'xlsx'
   export default {
     name: 'stock',
     data: function() {
       return {
         goodscode: null,
-        goodsname:null,
+        goodsname: null,
         specifications: null,
         show: false,
         data1: [],
@@ -58,6 +60,24 @@
       }
     },
     methods: {
+      exportExcel() {
+        let wb = XLSX.utils.table_to_book(document.querySelector('#rebateSetTable'));
+        let wbout = XLSX.write(wb, {
+          bookType: 'xlsx',
+          bookSST: true,
+          type: 'array'
+        });
+        try {
+          FileSaver.saveAs(new Blob([wbout], {
+            type: 'application/octet-stream'
+          }), '库存管理.xlsx');
+        } catch (e) {
+          if (typeof console !== 'undefined')
+            console.log(e, wbout)
+        }
+        return wbout
+      },
+
       //查询全部的方法
       findAll: function() {
         let url = 'http://localhost/StockItem/findAll';
@@ -84,7 +104,7 @@
       //多条件查询
       doSubmit: function() {
         this.data1 = this.result;
-        if (this.goodscode == null && this.goodsname == null && this.specifications == null ) {
+        if (this.goodscode == null && this.goodsname == null && this.specifications == null) {
           this.findAll();
         }
         if (this.goodscode != null && this.goodscode != "") {

@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <!--搜索框      高级查询状态有bug       -->
+    <!--搜索框           -->
     <el-form :inline="true" class="demo-form-inline" style="margin-top: 20px;margin-left: 30px;">
       <el-divider content-position="left">包装材料物品管理</el-divider>
       <el-form-item label="物品编码:">
@@ -20,21 +20,12 @@
         <el-button type="info" @click="show = !show" icon="el-icon-more-outline">更多</el-button>
       </el-form-item><br />
       <div v-if="show">
-        <el-form-item label="计划价格:">
-          <el-input v-model="plannedprice" placeholder="请输入计划价格"></el-input>
-        </el-form-item>
         <el-form-item label="规格:" style="margin-left: 27px;">
           <el-input v-model="specifications" placeholder="请输入规格"></el-input>
         </el-form-item>
         <el-form-item label="类型:">
           <el-input v-model="type" placeholder="请输入类型"></el-input>
         </el-form-item>
-        <el-form-item label="状态:">
-          <el-select v-model="status" placeholder="全部">
-            <el-option label="正常" :value="1"></el-option>
-            <el-option label="作废" :value="2"></el-option>
-          </el-select>
-        </el-form-item><br />
       </div>
       <el-button type="primary" @click="handleInsert()" icon="el-icon-plus">新增</el-button>
       <!--数据表格-->
@@ -103,12 +94,12 @@
         <el-row type="flex">
           <el-col>
             <el-form-item label="操作人工号" prop="operatorid" :label-width="formLabelWidth">
-              <el-input v-model="packFrom.operatorid" autocomplete="off" style="width: 200px;"></el-input>
+              <el-input v-model="packFrom.operatorid" autocomplete="off" style="width: 200px;" :readonly="readonly"></el-input>
             </el-form-item>
           </el-col>
           <el-col>
             <el-form-item label="操作人姓名" prop="operationunitid" :label-width="formLabelWidth">
-              <el-input v-model="packFrom.operationunitid" autocomplete="off" style="width: 200px;"></el-input>
+              <el-input v-model="packFrom.operationunitid" autocomplete="off" style="width: 200px;" :readonly="readonly"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -171,12 +162,12 @@
         <el-row type="flex">
           <el-col>
             <el-form-item label="操作人工号" prop="operatorid" :label-width="formLabelWidth">
-              <el-input v-model="packFrom.operatorid" autocomplete="off" style="width: 200px;"></el-input>
+              <el-input v-model="packFrom.operatorid" autocomplete="off" style="width: 200px;" :readonly="readonly"></el-input>
             </el-form-item>
           </el-col>
           <el-col>
             <el-form-item label="操作人姓名" prop="operationunitid" :label-width="formLabelWidth">
-              <el-input v-model="packFrom.operationunitid" autocomplete="off" style="width: 200px;"></el-input>
+              <el-input v-model="packFrom.operationunitid" autocomplete="off" style="width: 200px;" :readonly="readonly"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -208,6 +199,7 @@
         itemname: null,
         plannedprice: null,
         specifications: null,
+        readonly:true,
         type: null,
         status: null,
         show: false,
@@ -229,11 +221,23 @@
           operatorid: null,
           operationunitid: null,
           measurementunit: null
+        },
+        user: {
+          id: null,
+          empunit: null,
+          remark: null,
+          empno: null,
+          pwd: null,
+          disabled: null,
+          empname: null,
+          roleid: null,
+          querypwd: null
         }
       }
     },
     //查询全部
     created: function() {
+      this.user = JSON.parse(sessionStorage.getItem("user"));
       this.findAll();
     },
     methods: {
@@ -248,8 +252,8 @@
         this.radio = row.status;
         this.packFrom.measurementunit = row.measurementunit;
         //不需要显示，只需要从登陆用户获取
-        this.packFrom.operatorid = row.operatorid;
-        this.packFrom.operationunitid = row.operationunitid;
+        this.packFrom.operatorid=this.user.empno;
+        this.packFrom.operationunitid=this.user.empname;
         this.dialogFormVisible1 = true;
       },
       //清空表单
@@ -302,6 +306,8 @@
       handleInsert: function(row) {
         //显示对话框
         this.dialogFormVisible = true;
+        this.packFrom.operatorid=this.user.empno;
+        this.packFrom.operationunitid=this.user.empname;
       },
       //新增提交    操作人必须从当前用户获取
       doSubmit: function() {
@@ -317,7 +323,7 @@
               TYPE: this.packFrom.type,
               STATUS: this.radio,
               OPERATORID: this.packFrom.operatorid,
-              OperationUnitID: this.packFrom.operationunitid,
+              OperationUnitID: this.packFrom.operatorid,
               MEASUREMENTUNIT: this.packFrom.measurementunit
             }
             //ajax提交数据
@@ -357,7 +363,7 @@
               TYPE: this.packFrom.type,
               STATUS: this.radio,
               OPERATORID: this.packFrom.operatorid,
-              OperationUnitID: this.packFrom.operationunitid,
+              OperationUnitID: this.packFrom.operatorid,
               MEASUREMENTUNIT: this.packFrom.measurementunit
             }
             //ajax提交数据

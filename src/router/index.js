@@ -19,6 +19,11 @@ import Time from '@/views/log/Time'
 import LogLogisticstransfer from '@/views/log/LogLogisticstransfer'
 import logistics from '@/views/iae/logistics'
 
+import columnManage from '@/views/power/columnManage'
+import EmpManage from '@/views/power/EmpManage'
+import UnitsManage from '@/views/power/UnitsManage'
+
+
 Vue.use(Router)
 
 export default new Router({
@@ -29,7 +34,6 @@ export default new Router({
     },
     {
       path: '/Main',
-      name: 'Main',
       component: Main,
       children: [{
           path: '/',
@@ -153,6 +157,25 @@ export default new Router({
           component: () => import('@/views/sortingManagement/singleCargoExceptionMonitoring')
         },
         {
+          path: '/columnManage',
+          name: 'columnManage',
+          component: columnManage
+        },
+        {
+          path: '/EmpManage',
+          name: 'EmpManage',
+          component: EmpManage
+        },
+        {
+          path: '/UnitsManage',
+          name: 'UnitsManage',
+          component: UnitsManage
+        },{
+          path: '/singleCargoExceptionMonitoring',
+          name: 'singleCargoExceptionMonitoring',
+          component: () => import('@/views/sortingManagement/singleCargoExceptionMonitoring')
+        },
+        {
           path: '/deliveryStandard',
           name: 'deliveryStandard',
           component: () => import('@/views/basicData/deliveryStandard')
@@ -177,16 +200,7 @@ export default new Router({
           name: 'areaSet',
           component: () => import('@/views/basicData/areaSet')
         },
-        {
-          path: '/iae/Lineresource',
-          name: 'Lineresource',
-          component: Lineresource
-        },
-        {
-          path: '/iae/IaeArrival',
-          name: 'IaeArrival',
-          component: IaeArrival
-        },
+
         {
           path: '/iae/IaeDeparture',
           name: 'IaeDeparture',

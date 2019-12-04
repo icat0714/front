@@ -1,9 +1,9 @@
 <template>
 
   <el-scrollbar>
-    <el-menu router default-active="1" class="el-menu-vertical-demo" background-color="#334157" text-color="#fff"
+    <el-menu router :default-active="this.$route.path" class="el-menu-vertical-demo" background-color="#334157" text-color="#fff"
       active-text-color="#ffd04b" :collapse="showLeft" style="height: 1000px;">
-      <el-menu-item index="1">
+      <el-menu-item index="/Main">
         <i class="el-icon-s-home"></i>
         <span slot="title">首页</span>
       </el-menu-item>
@@ -78,17 +78,17 @@
             children: [{
                 id: '2-1',
                 text: '单位管理',
-                url: ''
+                url: '/UnitsManage'
               },
               {
                 id: '2-2',
                 text: '员工管理',
-                url: ''
+                url: '/EmpManage'
               },
               {
                 id: '2-3',
                 text: '栏目管理',
-                url: ''
+                url: '/columnManage'
               },
               {
                 id: '2-4',
@@ -156,7 +156,7 @@
             children: [{
                 id: '5-1',
                 text: '返货申请',
-                url: ''
+                url: '/returnthegoods/ReturnTheGoodsToApplyFor'
               },
               {
                 id: '5-2',
@@ -192,7 +192,7 @@
               {
                 id: '6-4',
                 text: '库存管理',
-                url: 'inventoryManagement'
+                url: '/inventoryManagement'
               }
             ]
           },
@@ -229,17 +229,17 @@
             children: [{
                 id: '9-1',
                 text: '入库',
-                url: ''
+                url: '/storage'
               },
               {
                 id: '9-2',
                 text: '出库',
-                url: ''
+                url: '/theLibrary'
               },
               {
                 id: '9-3',
                 text: '盘库',
-                url: ''
+                url: '/check'
               },
               {
                 id: '9-4',

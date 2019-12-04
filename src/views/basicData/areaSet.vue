@@ -192,13 +192,25 @@
 
         if (this.title == '新增') {
           axios.post("http://localhost/addBasBasicarchives", qs.stringify(this.form)).then(resp => {
-            console.log(resp.data);
+            axios.post("http://localhost/json_BasAreaList", null).then(resp => {
+              console.log(resp.data);
+              this.tableData = resp.data;
+              this.tableData1 = resp.data;
+            }).catch(error => {
+              console.log(error);
+            });
           }).catch(error => {
             console.log(error);
           });
         } else {
           axios.post("http://localhost/updateBasBasicarchives", qs.stringify(this.form)).then(resp => {
-            console.log(resp.data);
+           axios.post("http://localhost/json_BasAreaList", null).then(resp => {
+             console.log(resp.data);
+             this.tableData = resp.data;
+             this.tableData1 = resp.data;
+           }).catch(error => {
+             console.log(error);
+           });
           }).catch(error => {
             console.log(error);
           });

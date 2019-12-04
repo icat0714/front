@@ -43,10 +43,10 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination background style="margin-top: 20px;"
+    <!-- <el-pagination background style="margin-top: 20px;"
                    :current-page="page" :page-sizes="[1, 2, 3, 4]" :page-size="rows" layout="total, sizes, prev, pager, next, jumper"
                    :total="total">
-    </el-pagination>
+    </el-pagination> -->
 
 
     <!--对话框-->

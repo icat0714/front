@@ -78,7 +78,7 @@
             children: [{
                 id: '2-1',
                 text: '单位管理',
-                url: '/jurisdiction/UnitManagemen'
+                url: ''
               },
               {
                 id: '2-2',

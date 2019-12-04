@@ -14,8 +14,19 @@
       <el-table :data="data" style=" margin-top:10px;width: 100%;" tooltip-effect="dark" :border="true" max-height="550">
         <el-table-column prop="id" label="编号" min-width="50" align="center"></el-table-column>
         <el-table-column prop="empname" label="用户名" min-width="50" align="center"></el-table-column>
-        <el-table-column prop="roleid" label="角色" min-width="50" align="center"></el-table-column>
-        <el-table-column prop="disabled" label="状态" min-width="40" align="center"></el-table-column>
+        <el-table-column prop="roleid" label="角色" min-width="50" align="center">
+          <template slot-scope="scope">
+            <p v-if="scope.row.roleid=='1'">超级管理员</p>
+            <p v-if="scope.row.roleid=='2'">管理员</p>
+            <p v-if="scope.row.roleid=='3'">普通用户</p>
+          </template>
+        </el-table-column>
+        <el-table-column prop="disabled" label="状态" min-width="40" align="center">
+          <template slot-scope="scope">
+              <p v-if="scope.row.disabled=='1'">可用</p>
+              <p v-if="scope.row.disabled=='2'">不可用</p>
+          </template>
+        </el-table-column>
         <el-table-column prop="empno" label="工号" min-width="50" align="center" v-if="show"></el-table-column>
         <el-table-column prop="empunit" label="所属单位" min-width="50" align="center" v-if="show"></el-table-column>
         <el-table-column prop="pwd" label="密码" min-width="40" align="center" v-if="show"></el-table-column>
@@ -39,7 +50,11 @@
           </el-col>
           <el-col>
             <el-form-item label="员工角色" prop="roleid" :label-width="formLabelWidth">
-              <el-input v-model="empFrom.roleid" autocomplete="off" style="width: 200px;"></el-input>
+              <el-select v-model="empFrom.roleid" style="width: 200px;">
+                  <el-option label="超级管理员" :value="1"></el-option>
+                  <el-option label="管理员" :value="2"></el-option>
+                  <el-option label="普通用户" :value="3"></el-option>
+                </el-select>
             </el-form-item>
           </el-col>
         </el-row>
@@ -70,12 +85,18 @@
         <el-row type="flex">
           <el-col>
             <el-form-item label="状态" prop="disabled" :label-width="formLabelWidth">
-              <el-input v-model="empFrom.disabled" autocomplete="off" style="width: 200px;"></el-input>
+              <el-select v-model="empFrom.disabled" style="width: 200px;">
+                  <el-option label="可用" :value="1"></el-option>
+                  <el-option label="不可用" :value="2"></el-option>
+                </el-select>
+              </el-form-item>
             </el-form-item>
           </el-col>
           <el-col>
             <el-form-item label="所属部门" prop="empunit" :label-width="formLabelWidth">
-              <el-input v-model="empFrom.empunit" autocomplete="off" style="width: 200px;"></el-input>
+              <el-select v-model="empFrom.empunit" style="width: 200px;">
+                <el-option v-for="unit in unitFrom" :key="'unit'+unit.id" :label="unit.name" :value="unit.id"></el-option>
+              </el-select>
             </el-form-item>
           </el-col>
         </el-row>
@@ -99,7 +120,11 @@
           </el-col>
           <el-col>
             <el-form-item label="员工角色" prop="roleid" :label-width="formLabelWidth">
-              <el-input v-model="empFrom.roleid" autocomplete="off" style="width: 200px;"></el-input>
+              <el-select v-model="empFrom.roleid" style="width: 200px;">
+                  <el-option label="超级管理员" :value="1"></el-option>
+                  <el-option label="管理员" :value="2"></el-option>
+                  <el-option label="普通用户" :value="3"></el-option>
+                </el-select>
             </el-form-item>
           </el-col>
         </el-row>
@@ -130,12 +155,17 @@
         <el-row type="flex">
           <el-col>
             <el-form-item label="状态" prop="disabled" :label-width="formLabelWidth">
-              <el-input v-model="empFrom.disabled" autocomplete="off" style="width: 200px;"></el-input>
+              <el-select v-model="empFrom.disabled" style="width: 200px;">
+                  <el-option label="可用" :value="1"></el-option>
+                  <el-option label="不可用" :value="2"></el-option>
+                </el-select>
             </el-form-item>
           </el-col>
           <el-col>
             <el-form-item label="所属部门" prop="empunit" :label-width="formLabelWidth">
-              <el-input v-model="empFrom.empunit" autocomplete="off" style="width: 200px;"></el-input>
+              <el-select v-model="empFrom.empunit" style="width: 200px;">
+                <el-option v-for="unit in unitFrom" :key="'unit'+unit.id" :label="unit.name" :value="unit.id"></el-option>
+              </el-select>
             </el-form-item>
           </el-col>
         </el-row>
@@ -152,7 +182,7 @@
   import axios from 'axios'
   import qs from 'qs'
   export default {
-    name: 'Units',
+    name: 'Emp',
     data: function() {
       return {
         data: [],
@@ -172,8 +202,8 @@
           remark: null,
           disabled: null,
           empunit: null
-
-        }
+        },
+        unitFrom:[]
       }
     },
     created: function() {
@@ -181,6 +211,13 @@
       axios.post(url, null).then(resp => {
         this.result = resp.data;
         this.data = resp.data;
+      }).catch(error => {
+        console.log(error);
+      });
+
+      let url1 = 'http://localhost/Unit/findAll';
+      axios.post(url1, null).then(resp => {
+        this.unitFrom = resp.data;
       }).catch(error => {
         console.log(error);
       });
@@ -251,6 +288,7 @@
       doSubmit1: function() {
         this.$refs['empFrom'].validate((valid) => {
           if (valid) {
+            alert(this.empFrom.empunit)
             let url = 'http://localhost/Emp/insertEmp';
             let params = {
               EMPNAME: this.empFrom.empname,
@@ -336,7 +374,15 @@
       },
       //清空表单
       cleanForm:function(){
-
+          this.empFrom.empname=null;
+          this.empFrom.empno=null;
+          this.empFrom.pwd=null;
+          this.empFrom.querypwd=null;
+          this.empFrom.roleid=null;
+          this.empFrom.empunit=null;
+          this.empFrom.remark=null;
+          this.empFrom.disabled=null;
+          this.empFrom.id=null;
       }
     }
   }

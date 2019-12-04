@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <!--搜索框         高级查询  出库类型bug          -->
+    <!--搜索框                -->
     <el-form :inline="true" class="demo-form-inline" style="margin-top: 20px;margin-left: 30px;">
       <el-divider content-position="left">包装信息录入</el-divider>
       <el-form-item label="入库单号:">
@@ -69,19 +69,19 @@
                                   <!-- 从登陆获取 -->
           <el-col >
               <el-form-item label="开单人工号" prop="drawerno" :label-width="formLabelWidth">
-                <el-input v-model="stockFrom.drawerno" autocomplete="off" style="width: 200px;"></el-input>
+                <el-input v-model="stockFrom.drawerno" autocomplete="off" style="width: 200px;" :readonly="readonly"></el-input>
               </el-form-item>
           </el-col>
           <el-col >
               <el-form-item label="开单人姓名" prop="drawername" :label-width="formLabelWidth">
-                 <el-input v-model="stockFrom.drawername" autocomplete="off" style="width: 200px;"></el-input>
+                 <el-input v-model="stockFrom.drawername" autocomplete="off" style="width: 200px;" :readonly="readonly"></el-input>
               </el-form-item>
           </el-col>
         </el-row>
         <el-row type="flex">
           <el-col >
                 <el-form-item label="运输单号" prop="transport" :label-width="formLabelWidth">
-                   <el-input v-model="stockFrom.transport" autocomplete="off" style="width: 200px;"></el-input>
+                   <el-input v-model="stockFrom.transport" autocomplete="off" style="width: 200px;" ></el-input>
                 </el-form-item>
             </el-col>
           <el-col>
@@ -123,12 +123,12 @@
                                   <!-- 从登陆获取 -->
           <el-col >
               <el-form-item label="开单人工号" prop="drawerno" :label-width="formLabelWidth">
-                <el-input v-model="stockFrom.drawerno" autocomplete="off" style="width: 200px;"></el-input>
+                <el-input v-model="stockFrom.drawerno" autocomplete="off" style="width: 200px;" :readonly="readonly"></el-input>
               </el-form-item>
           </el-col>
           <el-col >
               <el-form-item label="开单人姓名" prop="drawername" :label-width="formLabelWidth">
-                 <el-input v-model="stockFrom.drawername" autocomplete="off" style="width: 200px;"></el-input>
+                 <el-input v-model="stockFrom.drawername" autocomplete="off" style="width: 200px;" :readonly="readonly"></el-input>
               </el-form-item>
           </el-col>
         </el-row>
@@ -325,6 +325,7 @@
         goodscode:null,
         goodsname:null,
         drawertime:null,
+        readonly:true,
         show:false,
         result:[],
         data1:[],
@@ -356,11 +357,23 @@
           type:null,
           measurementunit:null,
           status:null
+        },
+        user: {
+          id: null,
+          empunit: null,
+          remark: null,
+          empno: null,
+          pwd: null,
+          disabled: null,
+          empname: null,
+          roleid: null,
+          querypwd: null
         }
       }
     },
     //查询全部
     created: function() {
+      this.user = JSON.parse(sessionStorage.getItem("user"));
       let url = 'http://localhost/Stock/findAllStock';
       axios.post(url, null).then(resp => {
         this.result = resp.data;
@@ -423,6 +436,8 @@
       handleInsert: function() {
         //显示对话框
         this.dialogFormVisible = true;
+        this.stockFrom.drawerno=this.user.empno;
+        this.stockFrom.drawername=this.user.empname;
       },
       //新增提交
       doSubmit:function(){
@@ -500,6 +515,7 @@
         let url = 'http://localhost/Stock/findAllStock';
         axios.post(url, null).then(resp => {
           this.result = resp.data;
+          this.data1 = resp.data;
         }).catch(error => {
           console.log(error);
         });

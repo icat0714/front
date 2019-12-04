@@ -12,11 +12,16 @@
       <el-button type="primary" @click="handleInsert" icon="el-icon-plus">新增</el-button>
       <!--数据表格-->
       <el-table :data="data" style=" margin-top:10px;width: 100%;" :border="true" max-height="550">
-        <el-table-column prop="id" label="编号" min-width="50" align="center"></el-table-column>
-        <el-table-column prop="parentid" label="上级栏目" min-width="50" align="center"></el-table-column>
-        <el-table-column prop="type" label="栏目类型" min-width="50" align="center"></el-table-column>
+        <el-table-column prop="id" label="编号" min-width="30" align="center"></el-table-column>
+        <el-table-column prop="parentid" label="上级栏目" min-width="50" align="center">
+          <template slot-scope="scope">
+              <p v-if="scope.row.parentid==null">无</p>
+              <p v-if="scope.row.parentid!=''">{{scope.row.parentid}}</p>
+          </template>
+        </el-table-column>
+        <el-table-column prop="type" label="栏目类型" min-width="40" align="center"></el-table-column>
         <el-table-column prop="text" label="栏目名称" min-width="40" align="center"></el-table-column>
-        <el-table-column prop="url" label="栏目地址" min-width="40" align="center"></el-table-column>
+        <el-table-column prop="url" label="栏目地址" min-width="80" align="center"></el-table-column>
         <el-table-column prop="tip" label="栏目提示语" min-width="40" align="center"></el-table-column>
         <el-table-column prop="" label="操作" min-width="70" align="center">
           <template slot-scope="scope">
@@ -56,7 +61,9 @@
         <el-row>
           <el-col >
               <el-form-item label="上级栏目" prop="parentid" :label-width="formLabelWidth">
-                 <el-input v-model="menuFrom.parentid" autocomplete="off" style="width: 200px;"></el-input>
+                  <el-select v-model="menuFrom.parentid" style="width: 200px;">
+                    <el-option v-for="menu in result" :key="'menu'+menu.id" :label="menu.text" :value="menu.text"></el-option>
+                  </el-select>
               </el-form-item>
           </el-col>
         </el-row>
@@ -99,7 +106,9 @@
         <el-row>
           <el-col >
               <el-form-item label="上级栏目" prop="parentid" :label-width="formLabelWidth">
-                 <el-input v-model="menuFrom.parentid" autocomplete="off" style="width: 200px;"></el-input>
+                 <el-select v-model="menuFrom.parentid" style="width: 200px;">
+                   <el-option v-for="menu in result" :key="'menu'+menu.id" :label="menu.text" :value="menu.text"></el-option>
+                 </el-select>
               </el-form-item>
           </el-col>
         </el-row>
@@ -109,7 +118,6 @@
           <el-button type="primary" @click="doSubmit2">确 定</el-button>
         </div>
     </el-dialog>
-
 
   </div>
 </template>

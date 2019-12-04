@@ -94,12 +94,12 @@
         <el-row type="flex">
           <el-col>
             <el-form-item label="操作人工号" prop="operatorid" :label-width="formLabelWidth">
-              <el-input v-model="packFrom.operatorid" autocomplete="off" style="width: 200px;"></el-input>
+              <el-input v-model="packFrom.operatorid" autocomplete="off" style="width: 200px;" :readonly="readonly"></el-input>
             </el-form-item>
           </el-col>
           <el-col>
             <el-form-item label="操作人姓名" prop="operationunitid" :label-width="formLabelWidth">
-              <el-input v-model="packFrom.operationunitid" autocomplete="off" style="width: 200px;"></el-input>
+              <el-input v-model="packFrom.operationunitid" autocomplete="off" style="width: 200px;" :readonly="readonly"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -162,12 +162,12 @@
         <el-row type="flex">
           <el-col>
             <el-form-item label="操作人工号" prop="operatorid" :label-width="formLabelWidth">
-              <el-input v-model="packFrom.operatorid" autocomplete="off" style="width: 200px;"></el-input>
+              <el-input v-model="packFrom.operatorid" autocomplete="off" style="width: 200px;" :readonly="readonly"></el-input>
             </el-form-item>
           </el-col>
           <el-col>
             <el-form-item label="操作人姓名" prop="operationunitid" :label-width="formLabelWidth">
-              <el-input v-model="packFrom.operationunitid" autocomplete="off" style="width: 200px;"></el-input>
+              <el-input v-model="packFrom.operationunitid" autocomplete="off" style="width: 200px;" :readonly="readonly"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -199,6 +199,7 @@
         itemname: null,
         plannedprice: null,
         specifications: null,
+        readonly:true,
         type: null,
         status: null,
         show: false,
@@ -220,11 +221,23 @@
           operatorid: null,
           operationunitid: null,
           measurementunit: null
+        },
+        user: {
+          id: null,
+          empunit: null,
+          remark: null,
+          empno: null,
+          pwd: null,
+          disabled: null,
+          empname: null,
+          roleid: null,
+          querypwd: null
         }
       }
     },
     //查询全部
     created: function() {
+      this.user = JSON.parse(sessionStorage.getItem("user"));
       this.findAll();
     },
     methods: {
@@ -239,8 +252,8 @@
         this.radio = row.status;
         this.packFrom.measurementunit = row.measurementunit;
         //不需要显示，只需要从登陆用户获取
-        this.packFrom.operatorid = row.operatorid;
-        this.packFrom.operationunitid = row.operationunitid;
+        this.packFrom.operatorid=this.user.empno;
+        this.packFrom.operationunitid=this.user.empname;
         this.dialogFormVisible1 = true;
       },
       //清空表单
@@ -293,6 +306,8 @@
       handleInsert: function(row) {
         //显示对话框
         this.dialogFormVisible = true;
+        this.packFrom.operatorid=this.user.empno;
+        this.packFrom.operationunitid=this.user.empname;
       },
       //新增提交    操作人必须从当前用户获取
       doSubmit: function() {
@@ -308,7 +323,7 @@
               TYPE: this.packFrom.type,
               STATUS: this.radio,
               OPERATORID: this.packFrom.operatorid,
-              OperationUnitID: this.packFrom.operationunitid,
+              OperationUnitID: this.packFrom.operatorid,
               MEASUREMENTUNIT: this.packFrom.measurementunit
             }
             //ajax提交数据
@@ -348,7 +363,7 @@
               TYPE: this.packFrom.type,
               STATUS: this.radio,
               OPERATORID: this.packFrom.operatorid,
-              OperationUnitID: this.packFrom.operationunitid,
+              OperationUnitID: this.packFrom.operatorid,
               MEASUREMENTUNIT: this.packFrom.measurementunit
             }
             //ajax提交数据

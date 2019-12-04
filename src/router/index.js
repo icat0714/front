@@ -144,9 +144,9 @@ export default new Router({
           component: () => import('@/views/sortingManagement/packageQuery')
         },
         {
-          path:'/singleCargoExceptionMonitoring',
-          name:'singleCargoExceptionMonitoring',
-          component:()=>import('@/views/sortingManagement/singleCargoExceptionMonitoring')
+          path: '/singleCargoExceptionMonitoring',
+          name: 'singleCargoExceptionMonitoring',
+          component: () => import('@/views/sortingManagement/singleCargoExceptionMonitoring')
         },
         {
           path: '/columnManage',
@@ -162,6 +162,7 @@ export default new Router({
           path: '/UnitsManage',
           name: 'UnitsManage',
           component: UnitsManage
+        },{
           path: '/singleCargoExceptionMonitoring',
           name: 'singleCargoExceptionMonitoring',
           component: () => import('@/views/sortingManagement/singleCargoExceptionMonitoring')

@@ -29,7 +29,6 @@ export default new Router({
     },
     {
       path: '/Main',
-      name: 'Main',
       component: Main,
       children: [{
           path: '/',
@@ -177,16 +176,7 @@ export default new Router({
           name: 'areaSet',
           component: () => import('@/views/basicData/areaSet')
         },
-        {
-          path: '/iae/Lineresource',
-          name: 'Lineresource',
-          component: Lineresource
-        },
-        {
-          path: '/iae/IaeArrival',
-          name: 'IaeArrival',
-          component: IaeArrival
-        },
+
         {
           path: '/iae/IaeDeparture',
           name: 'IaeDeparture',

@@ -1,9 +1,9 @@
 <template>
 
   <el-scrollbar>
-    <el-menu router :default-active="1" class="el-menu-vertical-demo" background-color="#334157" text-color="#fff"
+    <el-menu router :default-active="this.$route.path" class="el-menu-vertical-demo" background-color="#334157" text-color="#fff"
       active-text-color="#ffd04b" :collapse="showLeft" style="height: 1000px;">
-      <el-menu-item index="1">
+      <el-menu-item index="/Main">
         <i class="el-icon-s-home"></i>
         <span slot="title">首页</span>
       </el-menu-item>
@@ -78,7 +78,7 @@
             children: [{
                 id: '2-1',
                 text: '单位管理',
-                url: ''
+                url: '/jurisdiction/UnitManagemen'
               },
               {
                 id: '2-2',
@@ -156,7 +156,7 @@
             children: [{
                 id: '5-1',
                 text: '返货申请',
-                url: ''
+                url: '/returnthegoods/ReturnTheGoodsToApplyFor'
               },
               {
                 id: '5-2',

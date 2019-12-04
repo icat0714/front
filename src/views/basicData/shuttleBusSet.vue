@@ -236,13 +236,25 @@
 
         if (this.title == '新增') {
           axios.post("http://localhost/addBasShuttlebus", qs.stringify(this.form)).then(resp => {
-            console.log(resp.data);
+            axios.post("http://localhost/json_BasShuttlebusList", null).then(resp => {
+              console.log(resp.data);
+              this.tableData=resp.data;
+              this.tableData1=resp.data;
+            }).catch(error => {
+              console.log(error);
+            });
           }).catch(error => {
             console.log(error);
           });
         } else {
           axios.post("http://localhost/updateBasShuttlebus", qs.stringify(this.form)).then(resp => {
-            console.log(resp.data);
+            axios.post("http://localhost/json_BasShuttlebusList", null).then(resp => {
+              console.log(resp.data);
+              this.tableData=resp.data;
+              this.tableData1=resp.data;
+            }).catch(error => {
+              console.log(error);
+            });
           }).catch(error => {
             console.log(error);
           });
@@ -266,14 +278,12 @@
     },
     created() {
       axios.post("http://localhost/json_LogTrackList", null).then(resp => {
-        console.log(resp.data);
         this.TrackData=resp.data;
       }).catch(error => {
         console.log(error);
       });
 
       axios.post("http://localhost/json_BasShuttlebusList", null).then(resp => {
-        console.log(resp.data);
         this.tableData=resp.data;
         this.tableData1=resp.data;
       }).catch(error => {

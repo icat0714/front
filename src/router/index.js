@@ -9,6 +9,15 @@ import warehousingManagement from '@/views/pack/warehousingManagement'
 import packagingMaterialManagement from '@/views/pack/packagingMaterialManagement'
 import Lineresource from '@/views/iae/Lineresource'
 import IaeArrival from '@/views/iae/IaeArrival'
+import IaeDeparture from '@/views/iae/IaeDeparture'
+import IaeExtract from '@/views/iae/IaeExtract'
+import IaeTimeinput from '@/views/iae/IaeTimeinput'
+import LogLogistics from '@/views/log/LogLogistics'
+import LogTrack from '@/views/log/LogTrack'
+import SelectLogTrack from '@/views/log/SelectLogTrack'
+import Time from '@/views/log/Time'
+import LogLogisticstransfer from '@/views/log/LogLogisticstransfer'
+import logistics from '@/views/iae/logistics'
 
 import columnManage from '@/views/power/columnManage'
 import EmpManage from '@/views/power/EmpManage'
@@ -25,7 +34,6 @@ export default new Router({
     },
     {
       path: '/Main',
-      name: 'Main',
       component: Main,
       children: [{
           path: '/',
@@ -191,9 +199,54 @@ export default new Router({
           path: '/areaSet',
           name: 'areaSet',
           component: () => import('@/views/basicData/areaSet')
+        },
+
+        {
+          path: '/iae/IaeDeparture',
+          name: 'IaeDeparture',
+          component: IaeDeparture
+        },
+        {
+          path: '/iae/IaeExtract',
+          name: 'IaeExtract',
+          component: IaeExtract
+        },
+        {
+          path: '/iae/IaeTimeinput',
+          name: 'IaeTimeinput',
+          component: IaeTimeinput
+        },
+        {
+          path: '/iae/logistics',
+          name: 'logistics',
+          component: logistics
+        },
+        {
+          path: '/log/LogLogistics',
+          name: 'LogLogistics',
+          component: LogLogistics
+        },
+        {
+          path: '/log/LogLogisticstransfer',
+          name: 'LogLogisticstransfer',
+          component: LogLogisticstransfer
+        },
+        {
+          path: '/log/LogTrack',
+          name: 'LogTrack',
+          component: LogTrack
+        },
+        {
+          path: '/log/SelectLogTrack',
+          name: 'SelectLogTrack',
+          component: SelectLogTrack
+        },
+        {
+          path: '/log/Time',
+          name: 'Time',
+          component: Time
         }
 
-      ]
-    }
-  ]
+    ]
+  }]
 })

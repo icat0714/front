@@ -55,7 +55,7 @@
       <el-table-column prop="surplustime" label="送达时限" min-width="70" align="center"></el-table-column>
 
     </el-table>
-    <el-pagination background style="margin-top: 20px;" :current-page="page" :page-sizes="[1, 2, 3, 4]" :page-size="rows"
+    <el-pagination background style="margin-top: 20px;"
       layout="total, sizes, prev, pager, next, jumper" :total="total">
     </el-pagination>
 

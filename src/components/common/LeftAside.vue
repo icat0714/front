@@ -1,7 +1,7 @@
 <template>
 
   <el-scrollbar>
-    <el-menu router :default-active="1" class="el-menu-vertical-demo" background-color="#334157" text-color="#fff"
+    <el-menu router default-active="1" class="el-menu-vertical-demo" background-color="#334157" text-color="#fff"
       active-text-color="#ffd04b" :collapse="showLeft" style="height: 1000px;">
       <el-menu-item index="1">
         <i class="el-icon-s-home"></i>

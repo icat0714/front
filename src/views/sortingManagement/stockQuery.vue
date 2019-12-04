@@ -33,33 +33,26 @@
     </el-form>
 
     <el-row>
-      <el-button size="mini" type="primary">导出</el-button>
+      <el-button @click="exportExcel" style="margin-top: 2px;" size="medium" type="success">导出</el-button>
     </el-row>
 
 
-    <el-table :data="tableData" style="width: 100%">
-      <el-table-column label="序号" width="50" prop="">
+    <el-table :data="tableData" style="width: 100%" id="table">
+      <el-table-column label="工作单号" width="100" prop="id">
       </el-table-column>
-      <el-table-column label="工作单号" width="100" prop="name">
+      <el-table-column label="入库人" width="100" prop="acceptperson">
       </el-table-column>
-
-      <el-table-column label="入库人" width="100" prop="name">
+      <el-table-column label="入库时间" width="100" prop="acceptdate">
       </el-table-column>
-      <el-table-column label="入库时间" width="100" prop="name">
+      <el-table-column label="到达地" width="100" prop="DeliveryPerson">
       </el-table-column>
-      <el-table-column label="在库时间" width="100" prop="name">
+      <el-table-column label="受理单位" width="100" prop="acceptcompany">
       </el-table-column>
-      <el-table-column label="到达地" width="100" prop="name">
+      <el-table-column label="收货地址" width="100" prop="acceptcompany">
       </el-table-column>
-      <el-table-column label="受理单位" width="100" prop="name">
+      <el-table-column label="在库件数" width="100" prop="count">
       </el-table-column>
-      <el-table-column label="收货地址" width="100" prop="name">
-      </el-table-column>
-      <el-table-column label="在库件数" width="100" prop="name">
-      </el-table-column>
-      <el-table-column label="重量" width="100" prop="name">
-      </el-table-column>
-      <el-table-column label="送达时限" width="100" prop="name">
+      <el-table-column label="重量" width="100" prop="weight">
       </el-table-column>
 
     </el-table>
@@ -72,6 +65,8 @@
 <script>
   import axios from 'axios'
   import qs from 'qs'
+  import FileSaver from 'file-saver'
+  import XLSX from 'xlsx'
 
   export default {
     name: 'stockQuery',
@@ -105,8 +100,35 @@
     methods: {
       onSelect: function() {
 
+      },
+      exportExcel() {
+        /* generate workbook object from table */
+        let wb = XLSX.utils.table_to_book(document.querySelector('#table'));
+        /* get binary string as output */
+        let wbout = XLSX.write(wb, {
+          bookType: 'xlsx',
+          bookSST: true,
+          type: 'array'
+        });
+        try {
+          FileSaver.saveAs(new Blob([wbout], {
+            type: 'application/octet-stream'
+          }), '用户提交返利表.xlsx');
+        } catch (e) {
+          if (typeof console !== 'undefined')
+            console.log(e, wbout)
+        }
+        return wbout
       }
-    }
+    },
+	created:function(){
+		axios.post("http://localhost/json_sorStorageList", null).then(resp => {
+		  console.log(resp.data);
+		  this.tableData = resp.data;
+		}).catch(error => {
+		  console.log(error);
+		});
+	}
 
 
   }

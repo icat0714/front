@@ -18,15 +18,18 @@
 
     <el-row>
       <el-button size="mini" type="primary" @click="dialogFormVisible=true">新增</el-button>
+      <div class="export">
+           <el-button @click="exportExcel" style="margin-top: 2px;" size="medium" type="success">导出</el-button>
+      </div>
     </el-row>
 
 
-    <el-table :data="tableData1" style="width: 100%">
+    <el-table :data="tableData1" style="width: 100%" id="table">
       <el-table-column label="序号" width="100" prop="id">
       </el-table-column>
       <el-table-column label="定区编码" width="100" prop="zonecode">
       </el-table-column>
-      <el-table-column label="省份" width="100" prop="province" :formatter="formatGrade">
+      <el-table-column label="省份" width="100" prop="province">
       </el-table-column>
       <el-table-column label="城市" width="100" prop="city">
       </el-table-column>
@@ -138,9 +141,12 @@
 <script>
   import axios from 'axios'
   import qs from 'qs'
+  import FileSaver from 'file-saver'
+  import XLSX from 'xlsx'
+
 
   export default {
-    name: 'basicArchives',
+    name: 'BasPartition',
     data: function() {
       return {
         formInline: {
@@ -165,6 +171,7 @@
         }], */
         dialogFormVisible: false,
         form: {
+          ID:null,
           PROVINCE: null,
           CITY: null,
           COUNTY: null,
@@ -188,6 +195,7 @@
       },
       handleEdit: function(row) {
         this.title = "修改";
+        this.form.ID=row.id;
         this.form.ZONECODE = row.zonecode;
         this.form.PROVINCE = row.Province;
         this.form.CITY = row.city;
@@ -205,13 +213,13 @@
       addDS: function() {
 
         if (this.title == '新增') {
-          axios.post("http://localhost/addBasBasicarchives", qs.stringify(this.form)).then(resp => {
+          axios.post("http://localhost/addBasPartition", qs.stringify(this.form)).then(resp => {
             console.log(resp.data);
           }).catch(error => {
             console.log(error);
           });
         } else {
-            axios.post("http://localhost/updateBasBasicarchives", qs.stringify(this.form)).then(resp => {
+            axios.post("http://localhost/updateBasPartition", qs.stringify(this.form)).then(resp => {
               console.log(resp.data);
             }).catch(error => {
               console.log(error);
@@ -235,10 +243,29 @@
         }else{
           return '是';
         }
+      },
+      exportExcel() {
+        /* generate workbook object from table */
+        let wb = XLSX.utils.table_to_book(document.querySelector('#table'));
+        /* get binary string as output */
+        let wbout = XLSX.write(wb, {
+          bookType: 'xlsx',
+          bookSST: true,
+          type: 'array'
+        });
+        try {
+          FileSaver.saveAs(new Blob([wbout], {
+            type: 'application/octet-stream'
+          }), '用户提交返利表.xlsx');
+        } catch (e) {
+          if (typeof console !== 'undefined')
+            console.log(e, wbout)
+        }
+        return wbout
       }
     },
     created() {
-      axios.post("http://localhost/json_BasBasicarchivesList", null).then(resp => {
+      axios.post("http://localhost/json_BasPartitionList", null).then(resp => {
         console.log(resp.data);
         this.tableData = resp.data;
         this.tableData1=resp.data;

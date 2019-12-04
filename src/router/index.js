@@ -117,6 +117,21 @@ export default new Router({
           component: () => import('@/views/sortingManagement/storage')
         },
         {
+          path: '/businessAcceptance',
+          name: 'businessAcceptance',
+          component: () => import('@/views/acceptance/businessAcceptance')
+        },
+        {
+          path: '/worksheetQuickInput',
+          name: 'worksheetQuickInput',
+          component: () => import('@/views/acceptance/worksheetQuickInput')
+        },
+        {
+          path: '/worksheetQuery',
+          name: 'worksheetQuery',
+          component: () => import('@/views/acceptance/worksheetQuery')
+        },
+        {
           path: '/theLibrary',
           name: 'theLibrary',
           component: () => import('@/views/sortingManagement/theLibrary')
@@ -200,6 +215,16 @@ export default new Router({
           name: 'areaSet',
           component: () => import('@/views/basicData/areaSet')
         },
+        {
+          path: '/BasZoneinfo',
+          name: 'BasZoneinfo',
+          component: () => import('@/views/basicData/BasZoneinfo')
+        },
+        {
+          path: '/BasPartition',
+          name: 'BasPartition',
+          component: () => import('@/views/basicData/BasPartition')
+        },
 
         {
           path: '/iae/IaeDeparture',
@@ -247,6 +272,7 @@ export default new Router({
           component: Time
         }
 
-    ]
-  }]
+      ]
+    }
+  ]
 })

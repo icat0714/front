@@ -57,17 +57,12 @@
               {
                 id: '1-6',
                 text: '管理分区',
-                url: ''
+                url: '/BasPartition'
               },
               {
                 id: '1-7',
                 text: '管理定区',
-                url: ''
-              },
-              {
-                id: '1-8',
-                text: '收派时间管理',
-                url: ''
+                url: '/BasZoneinfo'
               }
             ],
           },
@@ -104,17 +99,17 @@
             children: [{
                 id: '3-1',
                 text: '业务受理',
-                url: ''
+                url: '/businessAcceptance'
               },
               {
                 id: '3-2',
                 text: '工作单快速录入',
-                url: ''
+                url: '/worksheetQuickInput'
               },
               {
                 id: '3-3',
                 text: '工作单查询',
-                url: ''
+                url: '/worksheetQuery'
               }
             ]
           },

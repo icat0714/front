@@ -20,33 +20,38 @@
        style="width: 100%">
        <el-table-column
          fixed
-         prop="date"
-         label="日期"
+         prop="accBB.businessnoticeno"
+         label="工作单号"
          width="150">
        </el-table-column>
        <el-table-column
-         prop="name"
-         label="姓名"
+         prop="accBB.customcode"
+         label="客户单号"
          width="120">
        </el-table-column>
        <el-table-column
-         prop="province"
-         label="省份"
+         prop="producttime"
+         label="产品"
          width="120">
        </el-table-column>
        <el-table-column
-         prop="city"
-         label="市区"
+         prop="accBB.businessnoticeno"
+         label="业务通知单号"
          width="120">
        </el-table-column>
        <el-table-column
-         prop="address"
-         label="地址"
-         width="300">
+         prop="accBB.reservationtime"
+         label="取货时间"
+         width="120">
        </el-table-column>
        <el-table-column
-         prop="zip"
-         label="邮编"
+         prop="accBB.customname"
+         label="寄件人"
+         width="120">
+       </el-table-column>
+       <el-table-column
+         prop="accBB.pickerinfo"
+         label="取件人"
          width="120">
        </el-table-column>
        <el-table-column
@@ -65,7 +70,7 @@
 </template>
 
 <script>
-  
+
   import axios from 'axios'
   import qs from 'qs'
 
@@ -90,6 +95,7 @@
 
       axios.post(url, null).then(resp => {
         console.log(resp.data);
+        this.tableData=resp.data;
       }).catch(error => {
         console.log(error);
       });

@@ -21,7 +21,7 @@
     </el-row>
 
 
-    <el-table :data="tableData1" style="width: 100%">
+    <el-table :data="tableData1" style="width: 100%" id="table">
       <el-table-column label="基础档案编号" width="100" prop="id">
       </el-table-column>
       <el-table-column label="基础档案名称" width="100" prop="name">
@@ -118,6 +118,7 @@
   import axios from 'axios'
   import qs from 'qs'
 
+
   export default {
     name: 'basicArchives',
     data: function() {
@@ -152,16 +153,18 @@
           OPERATIONTIME: null
         },
         title: "新增",
-        tableData1:[]
+        tableData1: []
       }
     },
 
     methods: {
       onSelect: function() {
-        let {tableData}=this;
-        let name=this.formInline.name;
-        let p1=tableData.filter(c=>c.name.indexOf(name)!=-1);
-        this.tableData1=p1;
+        let {
+          tableData
+        } = this;
+        let name = this.formInline.name;
+        let p1 = tableData.filter(c => c.name.indexOf(name) != -1);
+        this.tableData1 = p1;
       },
       handleEdit: function(row) {
         this.title = "修改";
@@ -184,7 +187,7 @@
           axios.post("http://localhost/addBasBasicarchives", qs.stringify(this.form)).then(resp => {
             axios.post("http://localhost/json_BasBasicarchivesList", null).then(resp => {
               this.tableData = resp.data;
-              this.tableData1=resp.data;
+              this.tableData1 = resp.data;
             }).catch(error => {
               console.log(error);
             });
@@ -192,16 +195,16 @@
             console.log(error);
           });
         } else {
-            axios.post("http://localhost/updateBasBasicarchives", qs.stringify(this.form)).then(resp => {
-              axios.post("http://localhost/json_BasBasicarchivesList", null).then(resp => {
-                this.tableData = resp.data;
-                this.tableData1=resp.data;
-              }).catch(error => {
-                console.log(error);
-              });
+          axios.post("http://localhost/updateBasBasicarchives", qs.stringify(this.form)).then(resp => {
+            axios.post("http://localhost/json_BasBasicarchivesList", null).then(resp => {
+              this.tableData = resp.data;
+              this.tableData1 = resp.data;
             }).catch(error => {
               console.log(error);
             });
+          }).catch(error => {
+            console.log(error);
+          });
         }
         this.title = "新增";
         this.form.NAME = null;
@@ -210,22 +213,23 @@
         this.form.OPERATORID = null;
         this.form.OPERATIONUNITID = null;
         this.form.OPERATIONTIME = null;
-        this.dialogFormVisible=false;
+        this.dialogFormVisible = false;
 
       },
-      formatGrade:function(row, column, cellValue){
-        if(cellValue==0){
-          return'否';
-        }else{
+      formatGrade: function(row, column, cellValue) {
+        if (cellValue == 0) {
+          return '否';
+        } else {
           return '是';
         }
       }
+
     },
     created() {
       axios.post("http://localhost/json_BasBasicarchivesList", null).then(resp => {
         console.log(resp.data);
         this.tableData = resp.data;
-        this.tableData1=resp.data;
+        this.tableData1 = resp.data;
       }).catch(error => {
         console.log(error);
       });

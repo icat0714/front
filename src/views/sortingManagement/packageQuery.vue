@@ -44,29 +44,27 @@
     </el-form>
 
     <el-row>
-      <el-button size="mini" type="primary">导出</el-button>
+      <el-button @click="exportExcel" style="margin-top: 2px;" size="medium" type="success">导出</el-button>
     </el-row>
 
 
-    <el-table :data="tableData" style="width: 100%">
-      <el-table-column label="序号" width="50" prop="">
-      </el-table-column>
-      <el-table-column label="合包号" width="100" prop="name">
+    <el-table :data="tableData" style="width: 100%" id="table">
+      <el-table-column label="合包号" width="100" prop="id">
       </el-table-column>
 
-      <el-table-column label="封签号" width="100" prop="name">
+      <el-table-column label="封签号" width="100" prop="sealint">
       </el-table-column>
-      <el-table-column label="合包人" width="100" prop="name">
+      <el-table-column label="合包人" width="100" prop="packageperson">
       </el-table-column>
-      <el-table-column label="合包单位" width="100" prop="name">
+      <el-table-column label="合包单位" width="100" prop="reckondes">
       </el-table-column>
-      <el-table-column label="拆包人" width="100" prop="name">
+      <el-table-column label="拆包人" width="100" prop="ticketsum">
       </el-table-column>
-      <el-table-column label="拆包单位" width="100" prop="name">
+      <el-table-column label="拆包单位" width="100" prop="cargosum">
       </el-table-column>
-      <el-table-column label="记录人" width="100" prop="name">
+      <el-table-column label="记录人" width="100" prop="weightsum">
       </el-table-column>
-      <el-table-column label="记录时间" width="100" prop="name">
+      <el-table-column label="记录时间" width="100" prop="timelimit">
       </el-table-column>
 
     </el-table>
@@ -79,6 +77,8 @@
 <script>
   import axios from 'axios'
   import qs from 'qs'
+  import FileSaver from 'file-saver'
+  import XLSX from 'xlsx'
 
   export default {
     name: 'packageQuery',
@@ -112,7 +112,34 @@
     methods: {
       onSelect: function() {
 
+      },
+      exportExcel() {
+        /* generate workbook object from table */
+        let wb = XLSX.utils.table_to_book(document.querySelector('#table'));
+        /* get binary string as output */
+        let wbout = XLSX.write(wb, {
+          bookType: 'xlsx',
+          bookSST: true,
+          type: 'array'
+        });
+        try {
+          FileSaver.saveAs(new Blob([wbout], {
+            type: 'application/octet-stream'
+          }), '用户提交返利表.xlsx');
+        } catch (e) {
+          if (typeof console !== 'undefined')
+            console.log(e, wbout)
+        }
+        return wbout
       }
+    },
+    created:function(){
+      axios.post("http://localhost/json_SorPackageList", null).then(resp => {
+        console.log(resp.data);
+        this.tableData=resp.data;
+      }).catch(error => {
+        console.log(error);
+      });
     }
 
 

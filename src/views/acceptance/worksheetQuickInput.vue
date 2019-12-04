@@ -156,6 +156,7 @@
     },
     methods: {
       insert: function() {
+        this.AccBusinessadmissibility.BUSINESSNOTICENO=this.AccWorksheet.WORKSHEETNO;
         this.dialogFormVisible = true;
 
       },
@@ -178,6 +179,31 @@
           console.log(error);
         });
         this.dialogFormVisible = false;
+
+        this.AccWorksheet= {
+          WORKSHEETNO: null,
+          DESTINATION: null,
+          PRODUCTTIME: null,
+          TOTAL: null,
+          WEIGHT: null,
+          STOWAGEREQUIREMENTS: null
+        };
+
+        this.AccBusinessadmissibility= {
+          name: null,
+          BUSINESSNOTICENO: null,
+          CUSTOMCODE: null,
+          CUSTOMNAME: null,
+          LINKMAN: null,
+          TELPHONE: null,
+          PICKUPADDRESS: null,
+          ARRIVECITY: null,
+          time: null,
+          WEIGHT: null,
+          VOLUME: null,
+          IMPORTANTHINTS: null
+        }
+
       }
 
 

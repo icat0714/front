@@ -3,13 +3,13 @@
     <el-form :inline="true" :model="formInline" class="demo-form-inline" style="margin-left: 30px;margin-top: 30px;">
       <el-form-item label="所属单位">
         <el-select v-model="formInline.subordinateunit">
-          <el-option v-for="pro in proData" :key="'pro'+pro.id" :label="pro.name" :value="pro.name"></el-option>
+          <el-option v-for="t in UnitDate" :label="t.name" :key="'key-'+t.id" :value="t.id"></el-option>
         </el-select>
       </el-form-item>
 
       <el-form-item label="定区编码">
         <el-select v-model="formInline.zonecode">
-          <el-option v-for="c in cv" :key="'key-'+c.name" :label="c.name" :value="c.name"></el-option>
+          <el-option v-for="t in tableData" :label="t.zonecode" :key="'key-'+t.id" :value="t.zonecode"></el-option>
         </el-select>
       </el-form-item>
 
@@ -117,27 +117,13 @@
     data: function() {
       return {
         formInline: {
-          zonecode: ''
+          zonecode: null,
+          subordinateunit: null
         },
-       /* tableData: [{
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }], */
+
         dialogFormVisible: false,
         form: {
+          ID: null,
           ZONECODE: null,
           ZONENAME: null,
           ZONEPEOPLE: null,
@@ -145,27 +131,35 @@
           SUBORDINATEUNIT: null
         },
         title: "新增",
+        tableData: [],
         tableData1: [],
-        /* proData:[{name:'北京市',id:0},{name:'天津市',id:1},{name:'河北省',id:2}],
-        cityData:[
-          [{name:'平谷区',code:'110117'},{name:'东城区',code:'110101'},{name:'西城区',code:'110102'},{name:'崇文区',code:'110103'},{name:'宣武区',code:'110104'}],
-          [{name:'和平区',code:'120101'},{name:'河东区',code:'120102'},{name:'河西区',code:'120103'}],
-          [{name:'石家庄市',code:'130100'},{name:'长安区',code:'130102'},{name:'桥东区',code:'130103'},{name:'桥西区',code:'130104'},{name:'新华区',code:'130105'},{name:'井陉矿区',code:'130107'}]
-        ] */
+        UnitDate: []
+
       }
     },
 
     methods: {
       onSelect: function() {
         let {
-          tableData
+          tableData,
+          zonecode,
+          subordinateunit
         } = this;
-        let name = this.formInline.name;
-        let p1 = tableData.filter(c => c.name.indexOf(name) != -1);
+        let p1 = null;
+        
+
+        if (subordinateunit != '' && subordinateunit != null) {
+          p1 = tableData.filter(a => a.subordinateunit.indexOf(subordinateunit) != -1);
+          console.log(p1);
+        }
+
+
+
         this.tableData1 = p1;
       },
       handleEdit: function(row) {
         this.title = "修改";
+        this.form.ID = row.id;
         this.form.ZONECODE = row.zonecode;
         this.form.ZONENAME = row.zonename;
         this.form.ZONEPEOPLE = row.zonepeople;
@@ -181,13 +175,13 @@
       addDS: function() {
 
         if (this.title == '新增') {
-          axios.post("http://localhost/addBasBasicarchives", qs.stringify(this.form)).then(resp => {
+          axios.post("http://localhost/addBasZoneinfo", qs.stringify(this.form)).then(resp => {
             console.log(resp.data);
           }).catch(error => {
             console.log(error);
           });
         } else {
-          axios.post("http://localhost/updateBasBasicarchives", qs.stringify(this.form)).then(resp => {
+          axios.post("http://localhost/updateBasZoneinfo", qs.stringify(this.form)).then(resp => {
             console.log(resp.data);
           }).catch(error => {
             console.log(error);
@@ -210,10 +204,10 @@
         }
       }
     },
-    computed:{
-      cv:function(){
-        for(let i=0;i<this.proData.length;i++){
-          if(this.formInline.Province==this.proData[i].name){
+    computed: {
+      cv: function() {
+        for (let i = 0; i < this.proData.length; i++) {
+          if (this.formInline.Province == this.proData[i].name) {
             return this.cityData[i];
           }
         }
@@ -221,13 +215,21 @@
       }
     },
     created() {
-      axios.post("http://localhost/json_BasAreaList", null).then(resp => {
+      axios.post("http://localhost/json_BasZoneinfoList", null).then(resp => {
         console.log(resp.data);
         this.tableData = resp.data;
         this.tableData1 = resp.data;
       }).catch(error => {
         console.log(error);
       });
+
+      axios.post("http://localhost/Unit/findAll", null).then(resp => {
+        console.log(resp.data);
+        this.UnitDate = resp.data;
+      }).catch(error => {
+        console.log(error);
+      });
+
     }
 
 

@@ -74,14 +74,60 @@
           <el-col :span="12">
             <div>
               <el-form-item label="区(县)">
-                <el-input v-model="form.OPERATORID" placeholder="区(县)"></el-input>
+                <el-input v-model="form.COUNTY" placeholder="区(县)"></el-input>
               </el-form-item>
             </div>
           </el-col>
           <el-col :span="12">
             <div>
               <el-form-item label="邮政编码">
-                <el-input v-model="form.OPERATIONUNITID" placeholder="邮政编码"></el-input>
+                <el-input v-model="form.POSTALCODE" placeholder="邮政编码"></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+        </el-row>
+
+        <el-row :gutter="20">
+          <el-col :span="12">
+            <div>
+              <el-form-item label="简码">
+                <el-input v-model="form.SIMPLECODE" placeholder="简码"></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+          <el-col :span="12">
+            <div>
+              <el-form-item label="城市编码">
+                <el-input v-model="form.CITYCODE"></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+        </el-row>
+
+        <el-row :gutter="20">
+          <el-col :span="12">
+            <div>
+              <el-form-item label="进港单位">
+                <el-select v-model="form.ENTRYUNITID">
+                  <el-option label="单位1" value="1"></el-option>
+                  <el-option label="单位2" value="2"></el-option>
+                  <el-option label="单位3" value="3"></el-option>
+                  <el-option label="单位4" value="4"></el-option>
+                  <el-option label="单位5" value="5"></el-option>
+                </el-select>
+              </el-form-item>
+            </div>
+          </el-col>
+          <el-col :span="12">
+            <div>
+              <el-form-item label="出港单位">
+                <el-select v-model="form.COMPLEMENTUNITID">
+                  <el-option label="单位1" value="1"></el-option>
+                  <el-option label="单位2" value="2"></el-option>
+                  <el-option label="单位3" value="3"></el-option>
+                  <el-option label="单位4" value="4"></el-option>
+                  <el-option label="单位5" value="5"></el-option>
+                </el-select>
               </el-form-item>
             </div>
           </el-col>
@@ -97,12 +143,22 @@
           </el-col>
           <el-col :span="12">
             <div>
-              <el-form-item label="备注">
-                <el-input type="textarea" :rows="2" v-model="form.REMARKS"></el-input>
+              <el-form-item label="所属区域">
+                <el-select v-model="form.THEAREA">
+                  <el-option label="东北区" value="1"></el-option>
+                  <el-option label="华东区" value="2"></el-option>
+                  <el-option label="华南区" value="3"></el-option>
+                  <el-option label="西北区" value="4"></el-option>
+                  <el-option label="华中区" value="5"></el-option>
+                  <el-option label="西南区" value="6"></el-option>
+                  <el-option label="华北区" value="7"></el-option>
+                </el-select>
               </el-form-item>
             </div>
           </el-col>
         </el-row>
+
+
 
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -146,20 +202,76 @@
         }],
         dialogFormVisible: false,
         form: {
-          NAME: null,
-          GRADE: null,
-          REMARKS: null,
-          OPERATORID: null,
-          OPERATIONUNITID: null,
-          OPERATIONTIME: null
+          ID: null,
+          PROVINCE: null,
+          CITY: null,
+          COUNTY: null,
+          POSTALCODE: null,
+          SIMPLECODE: null,
+          CITYCODE: null,
+          ENTRYUNITID: null,
+          COMPLEMENTUNITID: null,
+          NATURE: null,
+          THEAREA: null
         },
         title: "新增",
         tableData1: [],
-        proData:[{name:'北京市',id:0},{name:'天津市',id:1},{name:'河北省',id:2}],
-        cityData:[
-          [{name:'平谷区',code:'110117'},{name:'东城区',code:'110101'},{name:'西城区',code:'110102'},{name:'崇文区',code:'110103'},{name:'宣武区',code:'110104'}],
-          [{name:'和平区',code:'120101'},{name:'河东区',code:'120102'},{name:'河西区',code:'120103'}],
-          [{name:'石家庄市',code:'130100'},{name:'长安区',code:'130102'},{name:'桥东区',code:'130103'},{name:'桥西区',code:'130104'},{name:'新华区',code:'130105'},{name:'井陉矿区',code:'130107'}]
+        proData: [{
+          name: '北京市',
+          id: 0
+        }, {
+          name: '天津市',
+          id: 1
+        }, {
+          name: '河北省',
+          id: 2
+        }],
+        cityData: [
+          [{
+            name: '平谷区',
+            code: '110117'
+          }, {
+            name: '东城区',
+            code: '110101'
+          }, {
+            name: '西城区',
+            code: '110102'
+          }, {
+            name: '崇文区',
+            code: '110103'
+          }, {
+            name: '宣武区',
+            code: '110104'
+          }],
+          [{
+            name: '和平区',
+            code: '120101'
+          }, {
+            name: '河东区',
+            code: '120102'
+          }, {
+            name: '河西区',
+            code: '120103'
+          }],
+          [{
+            name: '石家庄市',
+            code: '130100'
+          }, {
+            name: '长安区',
+            code: '130102'
+          }, {
+            name: '桥东区',
+            code: '130103'
+          }, {
+            name: '桥西区',
+            code: '130104'
+          }, {
+            name: '新华区',
+            code: '130105'
+          }, {
+            name: '井陉矿区',
+            code: '130107'
+          }]
         ]
       }
     },
@@ -175,12 +287,17 @@
       },
       handleEdit: function(row) {
         this.title = "修改";
-        this.form.NAME = row.name;
-        this.form.GRADE = row.grade;
-        this.form.REMARKS = row.remarks;
-        this.form.OPERATORID = row.operatorid;
-        this.form.OPERATIONUNITID = row.operationunitid;
-        this.form.OPERATIONTIME = row.operationtime;
+        this.form.ID = row.id;
+        this.form.PROVINCE = row.province;
+        this.form.CITY = row.city;
+        this.form.COUNTY = row.county;
+        this.form.POSTALCODE = row.postalcode;
+        this.form.SIMPLECODE = row.simplecode;
+        this.form.CITYCODE = row.citycode;
+        this.form.ENTRYUNITID = row.entryunitid;
+        this.form.COMPLEMENTUNITID = row.complementunitid;
+        this.form.NATURE = row.nature;
+        this.form.THEAREA = row.thearea;
 
         this.dialogFormVisible = true;
 
@@ -191,37 +308,32 @@
       addDS: function() {
 
         if (this.title == '新增') {
-          axios.post("http://localhost/addBasBasicarchives", qs.stringify(this.form)).then(resp => {
-            axios.post("http://localhost/json_BasAreaList", null).then(resp => {
-              console.log(resp.data);
-              this.tableData = resp.data;
-              this.tableData1 = resp.data;
-            }).catch(error => {
-              console.log(error);
-            });
+          axios.post("http://localhost/addBasArea", qs.stringify(this.form)).then(resp => {
+            console.log(resp.data);
           }).catch(error => {
             console.log(error);
           });
         } else {
-          axios.post("http://localhost/updateBasBasicarchives", qs.stringify(this.form)).then(resp => {
-           axios.post("http://localhost/json_BasAreaList", null).then(resp => {
-             console.log(resp.data);
-             this.tableData = resp.data;
-             this.tableData1 = resp.data;
-           }).catch(error => {
-             console.log(error);
-           });
+          axios.post("http://localhost/updateBasArea", qs.stringify(this.form)).then(resp => {
+            console.log(resp.data);
           }).catch(error => {
             console.log(error);
           });
         }
         this.title = "新增";
-        this.form.NAME = null;
-        this.form.MINWEIGHT = null;
-        this.form.MAXWEIGHT = null;
-        this.form.OPERATORID = null;
-        this.form.OPERATIONUNITID = null;
-        this.form.OPERATIONTIME = null;
+        this.form.ID = null;
+        this.form.PROVINCE = null;
+        this.form.CITY = null;
+        this.form.COUNTY = null;
+        this.form.POSTALCODE = null;
+        this.form.SIMPLECODE = null;
+        this.form.CITYCODE = null;
+        this.form.ENTRYUNITID = null;
+        this.form.COMPLEMENTUNITID = null;
+        this.form.NATURE = null;
+        this.form.THEAREA = null;
+
+
         this.dialogFormVisible = false;
 
       },
@@ -233,10 +345,10 @@
         }
       }
     },
-    computed:{
-      cv:function(){
-        for(let i=0;i<this.proData.length;i++){
-          if(this.formInline.Province==this.proData[i].name){
+    computed: {
+      cv: function() {
+        for (let i = 0; i < this.proData.length; i++) {
+          if (this.formInline.Province == this.proData[i].name) {
             return this.cityData[i];
           }
         }

@@ -62,30 +62,28 @@
     <el-table :data="tableData" style="width: 100%" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="30">
       </el-table-column>
-      <el-table-column label="序号" width="50" prop="">
-      </el-table-column>
-      <el-table-column label="异常编号" width="100" prop="name">
+      <el-table-column label="异常编号" width="100" prop="id">
       </el-table-column>
 
-      <el-table-column label="发起时间" width="100" prop="name">
+      <el-table-column label="发起时间" width="100" prop="launchdate">
       </el-table-column>
-      <el-table-column label="发起人" width="100" prop="name">
+      <el-table-column label="发起人" width="100" prop="launchperson">
       </el-table-column>
-      <el-table-column label="发起单位" width="100" prop="name">
+      <el-table-column label="发起单位" width="100" prop="launchcompany">
       </el-table-column>
-      <el-table-column label="异常类型" width="100" prop="name">
+      <el-table-column label="异常类型" width="100" prop="abnormaltype">
       </el-table-column>
-      <el-table-column label="交接单号" width="100" prop="name">
+      <el-table-column label="交接单号" width="100" prop="transferint">
       </el-table-column>
-      <el-table-column label="单号" width="100" prop="name">
+      <el-table-column label="单号" width="100" prop="cargoint">
       </el-table-column>
-      <el-table-column label="合包号" width="100" prop="name">
+      <el-table-column label="合包号" width="100" prop="packageint">
       </el-table-column>
-      <el-table-column label="对冲异常编号" width="100" prop="name">
+      <el-table-column label="对冲异常编号" width="100" prop="hedgeabnint">
       </el-table-column>
-      <el-table-column label="状态" width="100" prop="name">
+      <el-table-column label="状态" width="100" prop="abostate">
       </el-table-column>
-      <el-table-column label="处理时间" width="100" prop="name">
+      <el-table-column label="处理时间" width="100" prop="handledate">
       </el-table-column>
 
     </el-table>
@@ -135,7 +133,17 @@
       handleSelectionChange:function() {
 
       }
+      
+    },
+    created:function(){
+    	axios.post("http://localhost/json_SorAbnormal", null).then(resp => {
+    	  console.log(resp.data);
+    	  this.tableData = resp.data;
+    	}).catch(error => {
+    	  console.log(error);
+    	});
     }
+
 
 
   }

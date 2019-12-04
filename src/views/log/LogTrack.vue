@@ -40,7 +40,6 @@
     <el-pagination background style="margin-top: 20px;" :current-page="page" :page-sizes="[1, 2, 3, 4]" :page-size="rows"
       layout="total, sizes, prev, pager, next, jumper" :total="total">
     </el-pagination>
-    </el-dialog>
 
     <!--对话框-->
     <el-dialog :title="title" :visible.sync="dialogFormVisible">

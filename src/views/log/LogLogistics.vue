@@ -16,13 +16,13 @@
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" @click="onSubmit">查询</el-button>
       </el-form-item>
-      <div class="export">
-           <el-button @click="exportExcel" style="margin-top: 2px;" size="medium" type="success">导出</el-button>
-      </div>
       <el-form-item>
         <el-button type="primary" icon="el-icon-more" @click="more">更多</el-button>
       </el-form-item>
       <br>
+      <div class="export">
+           <el-button @click="exportExcel" style="margin-top: 2px;" size="medium" type="success">导出</el-button>
+      </div>
       <vue v-show="morekai">
         <el-form-item label="单位名称">
           <el-input v-model="companyname" placeholder="请输入单位名称"></el-input>
@@ -51,7 +51,6 @@
     <el-pagination background style="margin-top: 20px;" :current-page="page" :page-sizes="[1, 2, 3, 4]" :page-size="rows"
       layout="total, sizes, prev, pager, next, jumper" :total="total">
     </el-pagination>
-    </el-dialog>
 
   </div>
 </template>

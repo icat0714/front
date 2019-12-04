@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/components/common/Main'
-import BookList from '@/views/iae/BookList'
 import packagingInformationInput from '@/views/pack/packagingInformationInput'
 import packagingInformationQuery from '@/views/pack/packagingInformationQuery'
 import inventoryManagement from '@/views/pack/inventoryManagement'
@@ -177,6 +176,61 @@ export default new Router({
           path: '/areaSet',
           name: 'areaSet',
           component: () => import('@/views/basicData/areaSet')
+        },
+        {
+          path: '/iae/Lineresource',
+          name: 'Lineresource',
+          component: Lineresource
+        },
+        {
+          path: '/iae/IaeArrival',
+          name: 'IaeArrival',
+          component: IaeArrival
+        },
+        {
+          path: '/iae/IaeDeparture',
+          name: 'IaeDeparture',
+          component: IaeDeparture
+        },
+        {
+          path: '/iae/IaeExtract',
+          name: 'IaeExtract',
+          component: IaeExtract
+        },
+        {
+          path: '/iae/IaeTimeinput',
+          name: 'IaeTimeinput',
+          component: IaeTimeinput
+        },
+        {
+          path: '/iae/logistics',
+          name: 'logistics',
+          component: logistics
+        },
+        {
+          path: '/log/LogLogistics',
+          name: 'LogLogistics',
+          component: LogLogistics
+        },
+        {
+          path: '/log/LogLogisticstransfer',
+          name: 'LogLogisticstransfer',
+          component: LogLogisticstransfer
+        },
+        {
+          path: '/log/LogTrack',
+          name: 'LogTrack',
+          component: LogTrack
+        },
+        {
+          path: '/log/SelectLogTrack',
+          name: 'SelectLogTrack',
+          component: SelectLogTrack
+        },
+        {
+          path: '/log/Time',
+          name: 'Time',
+          component: Time
         }
 
     ]

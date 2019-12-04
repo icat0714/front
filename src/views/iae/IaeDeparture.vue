@@ -35,7 +35,7 @@
           <el-input v-model="weight" placeholder="请输入重量"></el-input>
         </el-form-item>
       </vue>
-    
+
     <div class="export">
          <el-button @click="exportExcel" style="margin-top: 2px;" size="medium" type="success">导出</el-button>
     </div>
@@ -58,7 +58,6 @@
     <el-pagination background style="margin-top: 20px;" :current-page="page" :page-sizes="[1, 2, 3, 4]" :page-size="rows"
       layout="total, sizes, prev, pager, next, jumper" :total="total">
     </el-pagination>
-    </el-dialog>
 
   </div>
 </template>

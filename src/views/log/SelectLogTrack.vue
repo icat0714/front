@@ -54,11 +54,9 @@
         </template>
       </el-table-column>
     </el-table>
-    </el-table>
     <el-pagination background style="margin-top: 20px;" :current-page="page" :page-sizes="[1, 2, 3, 4]" :page-size="rows"
       layout="total, sizes, prev, pager, next, jumper" :total="total">
     </el-pagination>
-    </el-dialog>
     <el-dialog :title="title" :fullscreen="true" :visible.sync="dialogFormVisible">
       <el-table :data="data2" style="width: 100%;" :border="true" max-height="550" align="center">
         <el-table-column prop="id" label="序号" min-width="60" align="center"></el-table-column>
